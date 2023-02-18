@@ -1,4 +1,5 @@
 import 'package:eazymen_customer/core/pages.dart';
+import 'package:eazymen_customer/modules/navigation/view_navigation.dart';
 import 'package:eazymen_customer/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         title: 'Flutter Demo',
         theme: theme,
-        home: const SizedBox(),
+        home: const NavigationView(),
         getPages: pages,
       ),
     );

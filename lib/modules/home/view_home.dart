@@ -48,6 +48,12 @@ class HomeView extends StatelessWidget {
               const Categories(),
               Space.vertical(12.h),
               const EazyMenList(),
+              Container(
+                height: 200,
+                color: Colors.black,
+                child: Text("New Text"),
+              )
+
             ],
           ),
         ),

@@ -1,5 +1,11 @@
+import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
+import 'package:eazymen_customer/modules/CustomerProfile/View_Customer_Profile.dart';
 import 'package:eazymen_customer/modules/home/view_home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
+
+import '../../EazyPizyStore/Modules/StoreHome/View_StoreHome.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
@@ -13,12 +19,10 @@ class _NavigationViewState extends State<NavigationView> {
 
   final List<Widget> _pages = [
     const HomeView(),
-    // const EazyPizyStoreScreen(),
     const SizedBox(),
-    // OrderScreen(true),
-    const SizedBox(),
-    // const EazyManCatalogScreen(),
-    const SizedBox(),
+    const ViewCart(),
+    const CustomerProfile(),
+    // const SizedBox(),
   ];
 
   @override
@@ -26,31 +30,6 @@ class _NavigationViewState extends State<NavigationView> {
     return WillPopScope(
       onWillPop: () async {
         return true;
-        // return (await Get.dialog(
-        //       context: context,
-        //       builder: (builder) {
-        //         return AlertDialog(
-        //           title: const Text('Do you want to exit?'),
-        //           actions: [
-        //             TextButton(
-        //               onPressed: () {
-        //                 Navigator.of(context).pop(false);
-        //               },
-        //               child: const Text(
-        //                 'Cancel',
-        //               ),
-        //             ),
-        //             TextButton(
-        //               onPressed: () {
-        //                 SystemNavigator.pop();
-        //               },
-        //               child: const Text('Exit'),
-        //             )
-        //           ],
-        //         );
-        //       },
-        //     )) ??
-        //     false;
       },
       child: Scaffold(
         body: _pages[_selectedPageIndex],
@@ -69,9 +48,10 @@ class _NavigationViewState extends State<NavigationView> {
           },
         ),
         floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniCenterDocked,
+            FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            Get.to(StoreHome());
             // Navigator.of(context).pushNamed('EazyPizyStore.routeName');
           },
           backgroundColor: Theme.of(context).primaryColor,
@@ -85,11 +65,12 @@ class _NavigationViewState extends State<NavigationView> {
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({
+  const CustomBottomNavigationBar({super.key,
     this.defaultSelectedIndex = 0,
     required this.iconList,
     required this.onChange,
   });
+
   final int defaultSelectedIndex;
   final void Function(int index) onChange;
   final List<IconData> iconList;
@@ -125,7 +106,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 
   Widget buildNavBarItem(IconData icon, int index) {
-    return GestureDetector(
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+        notchMargin: 0.5,
+
+
+        child: GestureDetector(
       onTap: () {
         widget.onChange(index);
         setState(() {
@@ -140,24 +126,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             ? const BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    width: 2,
-                    color: Colors.white,
+                    width: 3,
+                    color: Colors.blue,
                   ),
                 ),
-
-                // gradient: LinearGradient(colors: [
-                //   Colors.green.withOpacity(0.3),
-                //   Colors.green.withOpacity(0.015),
-                // ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
               )
             : const BoxDecoration(),
         child: Icon(
           icon,
-          color: index == _selectedIndex
-              ? Theme.of(context).primaryColor
-              : Colors.grey,
+          color: index == _selectedIndex ? Colors.blueAccent : Colors.grey,
         ),
       ),
-    );
+    ));
   }
 }

@@ -5,7 +5,6 @@ import 'package:eazymen_customer/modules/category/view_category.dart';
 import 'package:eazymen_customer/modules/home/view_home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
@@ -20,9 +19,9 @@ class _NavigationViewState extends State<NavigationView> {
   final List<Widget> _pages = [
     const HomeView(),
     const CategoryView(),
-    const SizedBox(),
+    // const SizedBox(),
     // const EazyManCatalogScreen(),
-    const SizedBox(),
+    // const SizedBox(),
     const ViewCart(),
     const CustomerProfile(),
     // const SizedBox(),

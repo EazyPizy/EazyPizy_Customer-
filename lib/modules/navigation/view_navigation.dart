@@ -1,11 +1,11 @@
+import 'package:eazymen_customer/EazyPizyStore/Modules/StoreHome/View_StoreHome.dart';
 import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
 import 'package:eazymen_customer/modules/CustomerProfile/View_Customer_Profile.dart';
+import 'package:eazymen_customer/modules/category/view_category.dart';
 import 'package:eazymen_customer/modules/home/view_home.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
-
-import '../../EazyPizyStore/Modules/StoreHome/View_StoreHome.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
@@ -19,6 +19,9 @@ class _NavigationViewState extends State<NavigationView> {
 
   final List<Widget> _pages = [
     const HomeView(),
+    const CategoryView(),
+    const SizedBox(),
+    // const EazyManCatalogScreen(),
     const SizedBox(),
     const ViewCart(),
     const CustomerProfile(),
@@ -47,11 +50,10 @@ class _NavigationViewState extends State<NavigationView> {
             });
           },
         ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.to(StoreHome());
+            Get.to(const StoreHome());
             // Navigator.of(context).pushNamed('EazyPizyStore.routeName');
           },
           backgroundColor: Theme.of(context).primaryColor,
@@ -65,7 +67,8 @@ class _NavigationViewState extends State<NavigationView> {
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key,
+  const CustomBottomNavigationBar({
+    super.key,
     this.defaultSelectedIndex = 0,
     required this.iconList,
     required this.onChange,
@@ -108,35 +111,34 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget buildNavBarItem(IconData icon, int index) {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-        notchMargin: 0.5,
-
-
-        child: GestureDetector(
-      onTap: () {
-        widget.onChange(index);
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      child: Container(
-        height: 60,
-        width: (MediaQuery.of(context).size.width / _iconList.length) - 30,
-        margin: const EdgeInsets.only(left: 15, right: 15),
-        decoration: index == _selectedIndex
-            ? const BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: 3,
-                    color: Colors.blue,
+      notchMargin: 0.5,
+      child: GestureDetector(
+        onTap: () {
+          widget.onChange(index);
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        child: Container(
+          height: 60,
+          width: (MediaQuery.of(context).size.width / _iconList.length) - 30,
+          margin: const EdgeInsets.only(left: 15, right: 15),
+          decoration: index == _selectedIndex
+              ? const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      width: 3,
+                      color: Colors.blue,
+                    ),
                   ),
-                ),
-              )
-            : const BoxDecoration(),
-        child: Icon(
-          icon,
-          color: index == _selectedIndex ? Colors.blueAccent : Colors.grey,
+                )
+              : const BoxDecoration(),
+          child: Icon(
+            icon,
+            color: index == _selectedIndex ? Colors.blueAccent : Colors.grey,
+          ),
         ),
       ),
-    ));
+    );
   }
 }

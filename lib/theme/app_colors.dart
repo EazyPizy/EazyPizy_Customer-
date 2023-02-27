@@ -10,4 +10,6 @@ abstract class EazyColors {
   static const Color lightBlack = Colors.black54;
   static const Color background = Color(0xfffAf9f6);
   static const Color appBarBG = Colors.white;
+  static const Color accent = Color(0xFF6666FF);
+  static const Color amber = Color(0xFFE69B19);
 }

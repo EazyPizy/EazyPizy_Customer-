@@ -39,11 +39,14 @@ dependencies:
   logger: ^1.1.0
   flutter_screenutil: ^5.6.1
   carousel_slider: ^4.2.1
-  google_fonts: ^4.0.3
-  icons_plus: ^4.0.0
+  # icons_plus: ^4.0.0
   eva_icons_flutter: ^3.1.0
   flutter_rating_bar: ^4.0.1
   order_tracker: ^0.0.2
+  google_fonts: ^4.0.3
+
+  cached_network_image: ^3.2.3
+  flutter_adaptive_scaffold: ^0.1.0
 
 dev_dependencies:
   flutter_test:

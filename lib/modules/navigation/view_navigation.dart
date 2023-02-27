@@ -1,3 +1,4 @@
+import 'package:eazymen_customer/modules/category/view_category.dart';
 import 'package:eazymen_customer/modules/home/view_home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,7 @@ class _NavigationViewState extends State<NavigationView> {
 
   final List<Widget> _pages = [
     const HomeView(),
-    // const EazyPizyStoreScreen(),
-    const SizedBox(),
-    // OrderScreen(true),
+    const CategoryView(),
     const SizedBox(),
     // const EazyManCatalogScreen(),
     const SizedBox(),

@@ -3,6 +3,9 @@ import 'package:eazymen_customer/widgets/easy_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../theme/eazy_spaces.dart';
+import 'CarouselImage.dart';
+
 class HomeBanner extends StatelessWidget {
   const HomeBanner({
     super.key,
@@ -10,10 +13,6 @@ class HomeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EasyContainer(
-      height: 125.h,
-      color: EazyColors.dummy,
-      child: const SizedBox(),
-    );
+    return Carousel();
   }
 }

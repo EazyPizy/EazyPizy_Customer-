@@ -1,11 +1,7 @@
 import 'package:eazymen_customer/modules/home/components/banner.dart';
 import 'package:eazymen_customer/modules/home/components/eazymen_list.dart';
-import 'package:eazymen_customer/theme/eazy_spaces.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../theme/app_colors.dart';
-import '../../widgets/easy_container.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
@@ -14,20 +10,14 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
       backgroundColor: EazyColors.background,
-
       body: DefaultTabController(
-
         length: 3,
         child: NestedScrollView(
-
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-
                   elevation: 0.5,
                   backgroundColor: EazyColors.appBarBG,
                   pinned: true,
@@ -35,12 +25,12 @@ class HomeView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text('Hanyman Near You,',
-                          style: Get.textTheme.titleMedium),
+                      Text('Handyman Near You,',
+                          style: Get.textTheme.titleMedium,),
                       //  style: Get.textTheme.bodySmall,
 
                       Text('home, H.No C31, Ashok Vihar, Phase 2, Gurgaon',
-                          style: Get.textTheme.titleMedium
+                          style: Get.textTheme.titleMedium,
                           //  style: Get.textTheme.bodySmall,
                           ),
                     ],
@@ -55,8 +45,12 @@ class HomeView extends StatelessWidget {
                   //
                   // ),
                 ),
-                SliverToBoxAdapter(
-                  child: HomeBanner(),
+                const SliverToBoxAdapter(
+
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 12),
+                    child: HomeBanner(),
+                  ),
                 ),
 
                 // child: SizedBox(

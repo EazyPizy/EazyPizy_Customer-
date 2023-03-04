@@ -32,7 +32,6 @@ class CustomerProfile extends StatelessWidget {
       ),
       backgroundColor: EazyColors.background,
       body: Column(
-
         children: [
           EasyContainer(
             color: Colors.blue,
@@ -59,9 +58,8 @@ class CustomerProfile extends StatelessWidget {
           // ),
           ListTile(
             tileColor: EazyColors.white,
-
             onTap: () {
-              Get.to(const BookingHistory());
+              Get.to(() => const BookingHistory());
             },
             leading: const Icon(Icons.savings_outlined),
             title: const Text('Orders'),
@@ -81,7 +79,6 @@ class CustomerProfile extends StatelessWidget {
           ),
           const ListTile(
             tileColor: EazyColors.white,
-
             onTap: rateRazyPizy,
             leading: Icon(Icons.home_work),
             title: Text('Rate EazyPizy on Play Store'),
@@ -92,7 +89,6 @@ class CustomerProfile extends StatelessWidget {
           ),
           ListTile(
             tileColor: EazyColors.white,
-
             onTap: () {
               Get.defaultDialog(radius: 10, title: 'Are you sure');
             },
@@ -102,14 +98,13 @@ class CustomerProfile extends StatelessWidget {
               Icons.chevron_right,
               color: Colors.blueAccent,
             ),
-
           ),
-         const Spacer(),
-         SizedBox(
-           height: 75,
-           width: 75,
-           child: Image.asset('assets/EazymenLogo.png'),
-         )
+          const Spacer(),
+          SizedBox(
+            height: 75,
+            width: 75,
+            child: Image.asset('assets/EazymenLogo.png'),
+          )
         ],
       ),
     );

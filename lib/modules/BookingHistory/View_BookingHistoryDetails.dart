@@ -15,11 +15,11 @@ class BookingHistoryDetails extends StatefulWidget {
   State<BookingHistoryDetails> createState() => _BookingHistoryDetailsState();
 }
 
-
 List<TextDto> orderList = [
   TextDto("Your order has been placed", "Fri, 25th Mar '22 - 10:47pm"),
   TextDto("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
-  TextDto("Your item has been picked up by courier partner.", "Tue, 29th Mar '22 - 5:00pm"),
+  TextDto("Your item has been picked up by courier partner.",
+      "Tue, 29th Mar '22 - 5:00pm"),
 ];
 
 List<TextDto> shippedList = [
@@ -34,15 +34,15 @@ List<TextDto> outOfDeliveryList = [
 List<TextDto> deliveredList = [
   TextDto("Your order has been delivered", "Thu, 31th Mar '22 - 3:58pm"),
 ];
+
 class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: EazyColors.appBarBG,
-        elevation: 0.5,
-
-          title: Text('Booking ID',style: Get.textTheme.titleMedium)),
+          backgroundColor: EazyColors.appBarBG,
+          elevation: 0.5,
+          title: Text('Booking ID', style: Get.textTheme.titleMedium)),
       body: SingleChildScrollView(
         padding: Space.scaffoldPadding,
         child: Column(
@@ -86,7 +86,7 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
               subtitle: const Text('4.5 Rating'),
               trailing: const Icon(Icons.chat_outlined),
             ),
-            ElevatedButton(onPressed: (){}, child: Text('Book Again')),
+            ElevatedButton(onPressed: () {}, child: Text('Book Again')),
             Padding(
               padding: const EdgeInsets.all(20),
               child: OrderTracker(
@@ -99,7 +99,72 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
                 deliveredTitleAndDateList: deliveredList,
               ),
             ),
+            OutlinedButton(
+              onPressed: () {
+                Get.bottomSheet(
 
+                  EasyContainer(
+                    borderRadius: 10,
+                    // height: 250,
+                    color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            'Cancellation Reason',
+                            style: Get.textTheme.titleLarge,
+                          ),
+                        ),
+                        ListTile(
+                          minVerticalPadding: 5,
+                          leading: Icon(Icons.radio_button_off),
+                          title: Text(
+                            'Incorrect service booked',
+                            style: Get.textTheme.titleMedium,
+                          ),
+                        ),
+                        ListTile(
+                          minVerticalPadding: 5,
+                          leading: Icon(Icons.radio_button_off),
+                          title: Text(
+                            'Didnt Like the Eazyman',
+                            style: Get.textTheme.titleMedium,
+                          ),
+                        ),
+                        ListTile(
+                          minVerticalPadding: 5,
+                          leading: Icon(Icons.radio_button_off),
+                          title: Text(
+                            'Dont want the service now',
+                            style: Get.textTheme.titleMedium,
+                          ),
+                        ),
+                        ListTile(
+                          minVerticalPadding: 5,
+                          leading: Icon(Icons.radio_button_off),
+                          title: Text(
+                            'Will Book again Soon',
+                            style: Get.textTheme.titleMedium,
+                          ),
+                        ),
+                        Spacer(),
+                        Center(
+                            child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text('Cancel Service',
+                                    style: TextStyle(color: Colors.red))))
+                      ],
+                    ),
+                  ),
+                );
+              },
+              child: const Text(
+                'Cancle Order',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
             ListTile(
               leading: EasyContainer(
                 borderRadius: 6,
@@ -107,19 +172,22 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
                 borderColor: Colors.blueAccent,
                 height: 60,
                 width: 60,
-                child: Image.asset('assets/five.jpg',
-
+                child: Image.asset(
+                  'assets/five.jpg',
                 ),
               ),
               tileColor: EazyColors.primary,
               minLeadingWidth: 8,
               minVerticalPadding: 15,
-              title: Text('AC Service and Repair',
-                style: Get.textTheme.titleMedium,),
-              subtitle: Text('Deep Clean AC Service (Split AC)',
-                style: Get.textTheme.titleSmall,),
-              trailing:
-              TextButton(onPressed: () {}, child: const Text('2')),
+              title: Text(
+                'AC Service and Repair',
+                style: Get.textTheme.titleMedium,
+              ),
+              subtitle: Text(
+                'Deep Clean AC Service (Split AC)',
+                style: Get.textTheme.titleSmall,
+              ),
+              trailing: TextButton(onPressed: () {}, child: const Text('2')),
             ),
             ListTile(
               tileColor: EazyColors.primary,
@@ -131,19 +199,21 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
                 borderColor: Colors.blueAccent,
                 height: 60,
                 width: 60,
-                child:Image.asset('assets/five.jpg',
-
+                child: Image.asset(
+                  'assets/five.jpg',
                 ),
               ),
-              title: Text('AC Service and Repair',
-                style: Get.textTheme.titleMedium,),
-              subtitle: Text('Deep Clean AC Service (Split AC)',
-                style: Get.textTheme.titleSmall,),
-              trailing:
-              TextButton(onPressed: () {}, child: const Text('2')),
+              title: Text(
+                'AC Service and Repair',
+                style: Get.textTheme.titleMedium,
+              ),
+              subtitle: Text(
+                'Deep Clean AC Service (Split AC)',
+                style: Get.textTheme.titleSmall,
+              ),
+              trailing: TextButton(onPressed: () {}, child: const Text('2')),
             ),
-            PaymentSummary()
-
+            const PaymentSummary()
           ],
         ),
       ),

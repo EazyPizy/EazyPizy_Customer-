@@ -7,7 +7,7 @@ ThemeData theme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: EazyColors.appBarBG,
     iconTheme: IconThemeData(
-      color: EazyColors.lightBlack,
+      color: EazyColors.black,
     ),
   ),
   textTheme: TextTheme(

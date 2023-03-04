@@ -2,6 +2,7 @@ import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/components/EazyMan_Info_Card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -12,6 +13,7 @@ import 'components/CustomerRivewTile.dart';
 import 'components/Easyman_ServiceCard.dart';
 import 'components/ViewCart_Bottom_Navigation.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EazymanProfile extends StatefulWidget {
   const EazymanProfile({super.key});
@@ -48,21 +50,22 @@ class _EazymanProfileState extends State<EazymanProfile> {
                         top = cons.biggest.height;
 
                         return FlexibleSpaceBar(
+
                           centerTitle: true,
                           title: AnimatedOpacity(
                             duration: Duration(milliseconds: 100),
                             opacity: top <= 130 ? 1.0 : 0.0,
                             child: Row(
                               children: [
-                                const SizedBox(
-                                  width: 12,
+                                 SizedBox(
+                                  width: 12.w,
                                 ),
                                 const CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
                                 ),
-                                const SizedBox(
-                                  width: 12,
+                                 SizedBox(
+                                  width: 12.w,
                                 ),
                                 Text(
                                   'Amit Bairwa',

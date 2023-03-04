@@ -20,12 +20,12 @@ class _BookingHistoryState extends State<BookingHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         elevation: 0.5,
         backgroundColor: EazyColors.appBarBG,
         title: Text(
           'Manage Orders',
-          style: Get.textTheme.headlineMedium,
+          style: Get.textTheme.titleMedium,
         ),
       ),
       body: DefaultTabController(

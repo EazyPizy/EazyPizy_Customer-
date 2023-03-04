@@ -13,6 +13,9 @@ class HomeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Carousel();
+    return const SizedBox(
+        height: 150,
+        width: double.infinity,
+        child:  Carousel());
   }
 }

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eazymen_customer/modules/category/components/_EazymanGridTile.dart';
 import 'package:eazymen_customer/modules/category/components/popular_categories.dart';
 import 'package:eazymen_customer/modules/home/components/banner.dart';
@@ -62,8 +61,6 @@ class _CategoryViewState extends State<CategoryView> {
                       const EazyNetworkImage(
                         url:
                             'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
-                        child:
-                            'https://thumbs.dreamstime.com/b/person-gray-photo-placeholder-man-shirt-white-background-person-gray-photo-placeholder-man-132818487.jpg',
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8, right: 8),
@@ -154,11 +151,12 @@ class _CategoryViewState extends State<CategoryView> {
                 SizedBox(
                   height: 500.h,
                   child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      // physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 10,
-                      itemBuilder: (context, index) => const EazyMenGridTile()),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: (context, index) => const EazyMenGridTile(),
+                  ),
                 ),
               ],
             ),
@@ -195,20 +193,18 @@ class TopRatedSection extends StatelessWidget {
               ),
               itemCount: 12,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => Column(children: [
-                EasyContainer(
-                  padding: 4,
-                  color: const Color(0xFFf6f6f6),
-                  child: EazyNetworkImage(
-                    url:
-                        'https://thumbs.dreamstime.com/b/person-gray-photo-placeholder-man-shirt-white-background-person-gray-photo-placeholder-man-132818487.jpg',
-                    child: CachedNetworkImage(
-                      imageUrl:
+              itemBuilder: (context, index) => Column(
+                children: const [
+                  EasyContainer(
+                    padding: 4,
+                    color: Color(0xFFf6f6f6),
+                    child: EazyNetworkImage(
+                      url:
                           'https://thumbs.dreamstime.com/b/person-gray-photo-placeholder-man-shirt-white-background-person-gray-photo-placeholder-man-132818487.jpg',
                     ),
                   ),
-                ),
-              ]),
+                ],
+              ),
             ),
           ),
         ],

@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
-
-import '../../../theme/app_colors.dart';
-import '../../../widgets/easy_container.dart';
-import '../../EazymanProfile/View_EazymanProfile.dart';
+import 'package:eazymen_customer/modules/EazymanProfile/View_EazymanProfile.dart';
+import 'package:eazymen_customer/modules/home/models/model_home.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
+import 'package:eazymen_customer/widgets/easy_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +22,10 @@ class EazyMenGridTile extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const EazymanProfile()),
+              MaterialPageRoute(
+                  builder: (context) => EazymanProfile(
+                        eazyMen: EazyMenModel(),
+                      )),
             );
           },
           // customPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -32,7 +34,11 @@ class EazyMenGridTile extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 8, top: 8, right: 8, bottom: 2),
+                  left: 8,
+                  top: 8,
+                  right: 8,
+                  bottom: 2,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
@@ -54,10 +60,11 @@ class EazyMenGridTile extends StatelessWidget {
                         height: 60,
                         width: 60,
                         child: Image.network(
-                            'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
+                          'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29',
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 8),
                         child: Column(
                           children: [
                             Text(
@@ -85,11 +92,11 @@ class EazyMenGridTile extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
+                                  padding: const EdgeInsets.only(top: 8),
                                   child: EasyContainer(
                                     elevation: 0.5,
                                     padding: 5,
@@ -111,10 +118,10 @@ class EazyMenGridTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
+                                  padding: const EdgeInsets.only(top: 8),
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Colors.blueAccent,
                                       ),
@@ -127,14 +134,14 @@ class EazyMenGridTile extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
+                                  padding: const EdgeInsets.only(top: 8),
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.book,
                                         color: Colors.blueAccent,
                                       ),
@@ -156,11 +163,9 @@ class EazyMenGridTile extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
-
       ],
     );
   }

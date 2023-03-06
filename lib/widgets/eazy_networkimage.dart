@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class EazyNetworkImage extends StatelessWidget {
-  const EazyNetworkImage({super.key, required this.url, required child});
+  const EazyNetworkImage({super.key, required this.url});
 
   final String url;
 

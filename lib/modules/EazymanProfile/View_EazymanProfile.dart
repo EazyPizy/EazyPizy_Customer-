@@ -24,131 +24,136 @@ class EazymanProfile extends StatefulWidget {
 
 class _EazymanProfileState extends State<EazymanProfile> {
   var top = 0.0;
+  bool _isAppBarExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: DefaultTabController(
-          length: 3,
-          child: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverAppBar(
-                    elevation: 0.5,
-                    backgroundColor: Colors.white,
-                    automaticallyImplyLeading: false,
-                    pinned: true,
-                    // title: Text("Plumber",
-                    // style: TextStyle(
-                    //   color: Colors.black
-                    // ),
-                    // ),
-                    expandedHeight: 250,
-                    flexibleSpace: LayoutBuilder(
-                      builder: (ctx, cons) {
-                        top = cons.biggest.height;
+        length: 3,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                elevation: 0.5,
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: !_isAppBarExpanded,
+                pinned: true,
+                // title: Text("Plumber",
+                // style: TextStyle(
+                //   color: Colors.black
+                // ),
+                // ),
+                expandedHeight: 250,
+                flexibleSpace: LayoutBuilder(
+                  builder: (ctx, cons) {
+                    top = cons.biggest.height;
 
-                        return FlexibleSpaceBar(
-
-                          centerTitle: true,
-                          title: AnimatedOpacity(
-                            duration: Duration(milliseconds: 100),
-                            opacity: top <= 130 ? 1.0 : 0.0,
-                            child: Row(
-                              children: [
-                                 SizedBox(
-                                  width: 12.w,
-                                ),
-                                const CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
-                                ),
-                                 SizedBox(
-                                  width: 12.w,
-                                ),
-                                Text(
-                                  'Amit Bairwa',
-                                  style: Get.textTheme.headlineMedium,
-                                )
-                              ],
+                    return FlexibleSpaceBar(
+                      titlePadding: const EdgeInsets.only(left: 30, bottom: 8),
+                      centerTitle: true,
+                      title: AnimatedOpacity(
+                        duration: Duration(milliseconds: 100),
+                        opacity: top <= 130 ? 1.0 : 0.0,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 12.w,
                             ),
-                          ),
-                          background: const Padding(
-                            padding: EdgeInsets.only(
-                              top: 90,
+                            const CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
                             ),
-                            child: VisitingCard(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Top Reviews"),
-                              TextButton(
-                                  onPressed: () {
-                                    viewAllReviews();
-                                  },
-                                  child: Text("View All"))
-                            ],
-                          ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            Text(
+                              'Amit Bairwa',
+                              style: Get.textTheme.headlineMedium,
+                            ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 50,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context, i) => CustomerReviewTile(
-                              index: i,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  // SliverToBoxAdapter(
-                  //     child: SizedBox(
-                  //   height: 50,
-                  //   child: ListView.builder(
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemCount: 100,
-                  //       itemBuilder: (context, i) => Card(
-                  //           elevation: 1,
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.all(8),
-                  //             child: Center(child: Text(' $i Best Review')),
-                  //           ))),
-                  // )),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _SliverAppBarDelegate(
-                      const TabBar(
-                        labelColor: Colors.black87,
-                        unselectedLabelColor: Colors.grey,
-                        tabs: [
-                          Tab(text: 'Near You'),
-                          Tab(text: 'Plumber'),
-                          Tab(text: 'AC Technician'),
+                      ),
+                      background: const Padding(
+                        padding: EdgeInsets.only(
+                          top: 90,
+                        ),
+                        child: VisitingCard(),
+
+                      ),
+
+                    );
+                  },
+                ),
+              ),
+
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Top Reviews'),
+                          TextButton(
+                              onPressed: viewAllReviews,
+                              child: Text('View All'))
                         ],
                       ),
                     ),
-                  )
-                ];
-              },
-              body: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: 10,
-                itemBuilder: (context, i) => const EazymanServiceCard(),
-              ))),
+                    SizedBox(
+                      height: 50,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 10,
+                        itemBuilder: (context, i) => CustomerReviewTile(
+                          index: i,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              // SliverToBoxAdapter(
+              //     child: SizedBox(
+              //   height: 50,
+              //   child: ListView.builder(
+              //       scrollDirection: Axis.horizontal,
+              //       itemCount: 100,
+              //       itemBuilder: (context, i) => Card(
+              //           elevation: 1,
+              //           child: Padding(
+              //             padding: const EdgeInsets.all(8),
+              //             child: Center(child: Text(' $i Best Review')),
+              //           ))),
+              // )),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  const TabBar(
+                    labelColor: Colors.black87,
+                    unselectedLabelColor: Colors.grey,
+                    tabs: [
+                      Tab(text: 'Near You'),
+                      Tab(text: 'Plumber'),
+                      Tab(text: 'AC Technician'),
+                    ],
+                  ),
+                ),
+              )
+            ];
+          },
+          body: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, i) => const EazymanServiceCard(),
+          ),
+        ),
+      ),
       bottomNavigationBar: ViewCartBottomNavigation(
         buttonWidget: customButtons(),
       ),
@@ -218,12 +223,16 @@ Future viewAllReviews() {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Customer Reviews', style: Get.textTheme.titleMedium,),
-            SizedBox(width: 100,
+            Text(
+              'Customer Reviews',
+              style: Get.textTheme.titleMedium,
+            ),
+            SizedBox(
+              width: 100,
               height: 30,
               child: FittedBox(
-
-                child: Image.asset('assets/EazymenLogo.png'),),
+                child: Image.asset('assets/EazymenLogo.png'),
+              ),
             )
           ],
         ),
@@ -297,7 +306,8 @@ Future viewAllReviews() {
               )
             ],
           ),
-        ),  Padding(
+        ),
+        Padding(
           padding: const EdgeInsets.all(4.0),
           child: Row(
             children: [

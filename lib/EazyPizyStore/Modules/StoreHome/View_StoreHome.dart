@@ -10,8 +10,10 @@ import '../../../modules/category/view_category.dart';
 import '../../../modules/home/components/banner.dart';
 import '../../../modules/home/components/eazymen_list.dart';
 import '../../../theme/eazy_spaces.dart';
+import '../../../widgets/easy_container.dart';
 import '../../../widgets/eazy_networkimage.dart';
 import '../../ProductWidget.dart';
+import '../subCategory/view_SubCategory.dart';
 
 class StoreHome extends StatefulWidget {
   const StoreHome({super.key});
@@ -140,6 +142,8 @@ class _StoreHomeState extends State<StoreHome> {
                     // ]),
                   ],
                 ),
+
+
               );
             },
           ),
@@ -167,14 +171,12 @@ class _StoreHomeState extends State<StoreHome> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       // create a widget for each item in the grid
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue.withOpacity(0.05),
-                          border: Border.all(
-                            color: Colors.blue.withOpacity(0.05),
-                            width: 1,
-                          ),
+                      return InkWell(
+                        onTap: () {
+                          Get.to(NavRailExample());
+                        },
+                        child: Container(
+                          color: Colors.blueAccent.withOpacity(0.500),
                         ),
                       );
                     },
@@ -189,10 +191,8 @@ class _StoreHomeState extends State<StoreHome> {
                 color: EazyColors.lightBlack,
               ),
               Space.vertical(12.h),
-              const TopRatedSection(),
-              Space.vertical(12.h),
               const ProductCardWidget(),
-              ProductGridView() // SizedBox(
+              const ProductGridView() // SizedBox(
               //   //height: 500.h,
               //   child: ListView.builder(
               //     scrollDirection: Axis.horizontal,
@@ -225,9 +225,10 @@ class ProductGridView extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         // number of columns in the grid
-        mainAxisSpacing: 5,
+        mainAxisSpacing: 10,
+        mainAxisExtent: 233,
         // spacing between rows
-        crossAxisSpacing: 5, // spacing between columns
+        crossAxisSpacing: 10, // spacing between columns
       ),
       itemBuilder: (BuildContext context, int index) {
         // create a widget for each item in the grid

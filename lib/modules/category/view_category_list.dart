@@ -1,48 +1,97 @@
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/theme/eazy_spaces.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
+import 'package:eazymen_customer/widgets/eazy_networkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class CategoryList extends StatelessWidget {
+class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
 
+  @override
+  State<CategoryList> createState() => _CategoryListState();
+}
+
+double top = 0;
+
+class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     // return Scaffold(body: ListView.separated());
     return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: Space.scaffoldPadding,
-        child: Column(
-          children: [
-            Space.vertical(12.h),
-            SizedBox(
-              height: 40.h,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                separatorBuilder: (context, index) => Space.horizontal(10.w),
-                itemBuilder: (context, index) => _CategoryTabItem(
-                  isActive: index == 0,
-                  label: 'Cat $index',
-                  onTap: () {},
-                ),
+        // appBar: AppBar(
+        //   title:  Text('ServiceCat', style: Get.textTheme.titleMedium,),
+        // ),
+        body: CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          expandedHeight: 50,
+          // backgroundColor: Colors.orange,
+          pinned: true,
+          // floating: false,
+          // snap: true,
+          //   title:  Text(
+          // 'Home Servicesss',
+          //   style: Get.textTheme.headlineMedium,
+          // ),
+          flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              color: Colors.white,
+            ),
+
+            title: AnimatedOpacity(
+              duration: const Duration(milliseconds: 100),
+              opacity: top <= 130 ? 1.0 : 0.0,
+              child: Row(
+                children: [
+                  Text(
+                    'Home Servicesss',
+                    style: Get.textTheme.headlineMedium,
+                  )
+                ],
               ),
             ),
-            Space.vertical(12.h),
-            Expanded(
-              child: ListView.separated(
-                itemCount: 10,
-                separatorBuilder: (context, index) => Space.vertical(10.h),
-                itemBuilder: (context, index) => const _EazyMenTile(),
-              ),
-            )
-          ],
+         ),
         ),
-      ),
-    );
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              const EazyNetworkImage(
+                url:
+                    'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
+                child:
+                    'https://thumbs.dreamstime.com/b/person-gray-photo-placeholder-man-shirt-white-background-person-gray-photo-placeholder-man-132818487.jpg',
+              ),
+              SizedBox(
+                height: 40,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  separatorBuilder: (context, index) => Space.horizontal(10.w),
+                  itemBuilder: (context, index) => _CategoryTabItem(
+                    isActive: index == 0,
+                    label: 'Cat $index',
+                    onTap: () {},
+                  ),
+                ),
+              ),
+              SizedBox(
+                child: Expanded(
+                  child: ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    separatorBuilder: (context, index) => Space.vertical(10.h),
+                    itemBuilder: (context, index) => const _EazyMenTile(),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 }
 
@@ -123,6 +172,7 @@ class _CategoryTabItem extends StatelessWidget {
     required this.label,
     required this.onTap,
   });
+
   final VoidCallback onTap;
 
   final bool isActive;
@@ -146,3 +196,4 @@ class _CategoryTabItem extends StatelessWidget {
     );
   }
 }
+

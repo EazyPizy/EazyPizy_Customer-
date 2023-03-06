@@ -1,33 +1,31 @@
 import 'package:eazymen_customer/modules/home/components/banner.dart';
 import 'package:eazymen_customer/modules/home/components/eazymen_list.dart';
-import 'package:eazymen_customer/theme/eazy_spaces.dart';
+import 'package:eazymen_customer/modules/home/ctrl_home.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../theme/app_colors.dart';
-import '../../widgets/easy_container.dart';
 import 'package:get/get.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-
-      backgroundColor: EazyColors.background,
-
-      body: DefaultTabController(
-
-        length: 3,
-        child: NestedScrollView(
-
+    // Get.put(HomeController());
+    return GetBuilder(
+      init: HomeController(this),
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: EazyColors.background,
+          body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-
                   elevation: 0.5,
                   backgroundColor: EazyColors.appBarBG,
                   pinned: true,
@@ -35,14 +33,17 @@ class HomeView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text('Hanyman Near You,',
-                          style: Get.textTheme.titleMedium),
+                      Text(
+                        'Hanyman Near You,',
+                        style: Get.textTheme.titleMedium,
+                      ),
                       //  style: Get.textTheme.bodySmall,
 
-                      Text('home, H.No C31, Ashok Vihar, Phase 2, Gurgaon',
-                          style: Get.textTheme.titleMedium
-                          //  style: Get.textTheme.bodySmall,
-                          ),
+                      Text(
+                        'home, H.No C31, Ashok Vihar, Phase 2, Gurgaon',
+                        style: Get.textTheme.titleMedium,
+                        //  style: Get.textTheme.bodySmall,
+                      ),
                     ],
                   ),
                   //  expandedHeight: 330,
@@ -55,7 +56,7 @@ class HomeView extends StatelessWidget {
                   //
                   // ),
                 ),
-                SliverToBoxAdapter(
+                const SliverToBoxAdapter(
                   child: HomeBanner(),
                 ),
 
@@ -69,25 +70,73 @@ class HomeView extends StatelessWidget {
                 //         child: CircleAvatar(child: Text(' $i ')),
                 //       )),
                 // )),
-
+                // if (controller.catLoading)
+                //   const SizedBox()
+                // else
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
-                    const TabBar(
+                    TabBar(
+                      controller: controller.tabController,
+                      // onTap: (value) {
+                      //   controller.tabController.notifyListeners();
+                      // },
                       labelColor: Colors.black87,
-                      unselectedLabelColor: Colors.grey,
-                      tabs: [
-                        Tab(text: 'Near You'),
-                        Tab(text: 'Plumber'),
-                        Tab(text: 'AC Technician'),
-                      ],
+                      unselectedLabelColor: Colors.grey, isScrollable: true,
+                      tabs: controller.categories
+                          .map(
+                            (e) => Tab(
+                              text: e.serviceName,
+                            ),
+                          )
+                          .toList(),
+                      // tabs: [
+                      //   Tab(text: 'Near You'),
+                      //   Tab(text: 'Plumber'),
+                      //   Tab(text: 'AC Technician'),
+                      // ],
                     ),
                   ),
                 ),
               ];
             },
-            body: const EazyMenList()),
-      ),
+            body: controller.loading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : controller.eazyMen.isEmpty
+                    ? const Center(
+                        child: Text('Empty'),
+                      )
+                    : TabBarView(
+                        controller: controller.tabController,
+                        children: controller.categories
+                            .map(
+                              (e) => ListView.builder(
+                                // shrinkWrap: true,
+                                // physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.eazyMen.length,
+
+                                itemBuilder: (context, index) =>
+                                    EazyMenTile(controller.eazyMen[index]),
+                              ),
+                            )
+                            .toList(),
+                        // children: [
+                        //   ListView.builder(
+                        //     // shrinkWrap: true,
+                        //     // physics: const NeverScrollableScrollPhysics(),
+                        //     itemCount: controller.eazyMen.length,
+
+                        //     itemBuilder: (context, index) =>
+                        //         EazyMenTile(controller.eazyMen[index]),
+                        //   ),
+                        // ],
+                      ),
+            // body: const EazyMenList(),
+          ),
+        );
+      },
     );
   }
 }

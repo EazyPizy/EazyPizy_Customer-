@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 List<GetPage> pages = [
   GetPage(
     name: Routes.HOME,
-    page: () => SizedBox(),
+    page: SizedBox.new,
   ),
 ];

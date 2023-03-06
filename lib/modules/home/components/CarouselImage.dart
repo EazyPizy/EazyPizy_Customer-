@@ -10,7 +10,7 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   final List<String> imageList = [
-    'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+    'https://mykit.in/crm/public/uploads/website_section_image/LyOFHmLMIYWEgG8tsBXweUQN7sTCsu.jpg',
     'https://mykit.in/crm/public/uploads/website_section_image/uZ4cJcyKU1PMyIihywU9qyaWzjojB0.jpg',
     'https://mykit.in/crm/public/uploads/website_section_image/BPCbXgEuhKDSpPTsAVXNKZKc26GDQo.jpg',
     'https://mykit.in/crm/public/uploads/website_slider_images/lHXqadJX5rvVfDY14xpuhC35hnioqO.jpg'
@@ -31,7 +31,6 @@ class _CarouselState extends State<Carousel> {
         );
       }).toList(),
       options: CarouselOptions(
-
         autoPlay: false,
         aspectRatio: 2,
       ),

@@ -72,10 +72,9 @@ class EazymanProfile extends StatelessWidget {
                                 )
                               ],
                             ),
-                          ),
-                          background: const Padding(
-                            padding: EdgeInsets.only(
-                              top: 90,
+                            const CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
                             ),
                             child: VisitingCard(),
                           ),

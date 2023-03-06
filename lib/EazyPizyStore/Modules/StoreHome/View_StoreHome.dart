@@ -221,9 +221,10 @@ class ProductGridView extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         // number of columns in the grid
-        mainAxisSpacing: 5,
+        mainAxisSpacing: 10,
+        mainAxisExtent: 233,
         // spacing between rows
-        crossAxisSpacing: 5, // spacing between columns
+        crossAxisSpacing: 10, // spacing between columns
       ),
       itemBuilder: (BuildContext context, int index) {
         // create a widget for each item in the grid

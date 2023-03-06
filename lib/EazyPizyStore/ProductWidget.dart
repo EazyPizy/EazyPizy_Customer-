@@ -55,16 +55,20 @@ class ProductCardWidget extends StatelessWidget {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: EasyContainer(
-            height: 20,
-            width: 50,
-            color: Colors.blueAccent,
-            child: Text(
-              '50 OFF',
-              style: Get.textTheme.titleSmall,
-            ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Align(
+
+              alignment: Alignment.topLeft,
+              child:
+
+              EasyContainer(
+
+                height: 20,
+                width: 50,
+                color: Colors.blueAccent,
+                child: Text('50 OFF',style: Get.textTheme.titleSmall,),
+              )
           ),
         )
       ],

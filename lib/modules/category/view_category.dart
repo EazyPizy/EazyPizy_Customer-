@@ -22,8 +22,9 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: EazyColors.white,
+      backgroundColor: EazyColors.dummy,
       body: CustomScrollView(
+
         slivers: [
           SliverAppBar(
             automaticallyImplyLeading: false,
@@ -49,7 +50,7 @@ class _CategoryViewState extends State<CategoryView> {
                           width: 12,
                         ),
                         Text(
-                          'Home Services',
+                          'Home Servicesss',
                           style: Get.textTheme.headlineMedium,
                         )
                       ],

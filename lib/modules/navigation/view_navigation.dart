@@ -19,12 +19,8 @@ class _NavigationViewState extends State<NavigationView> {
   final List<Widget> _pages = [
     const HomeView(),
     const CategoryView(),
-    // const SizedBox(),
-    // const EazyManCatalogScreen(),
-    // const SizedBox(),
     const ViewCart(),
     const CustomerProfile(),
-    // const SizedBox(),
   ];
 
   @override
@@ -35,19 +31,23 @@ class _NavigationViewState extends State<NavigationView> {
       },
       child: Scaffold(
         body: _pages[_selectedPageIndex],
-        backgroundColor: Colors.white,
-        bottomNavigationBar: CustomBottomNavigationBar(
-          iconList: const [
-            Icons.home,
-            Icons.category_rounded,
-            Icons.shopping_cart,
-            Icons.person,
-          ],
-          onChange: (index) {
-            setState(() {
-              _selectedPageIndex = index;
-            });
-          },
+        bottomNavigationBar: BottomAppBar(
+          notchMargin: 5,
+          shape: const CircularNotchedRectangle(),
+          child: CustomBottomNavigationBar(
+            iconList: const [
+              Icons.home,
+              Icons.category_rounded,
+          //    Icons.cake_sharp,
+              Icons.shopping_cart,
+              Icons.person,
+            ],
+            onChange: (index) {
+              setState(() {
+                _selectedPageIndex = index;
+              });
+            },
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
@@ -55,8 +55,8 @@ class _NavigationViewState extends State<NavigationView> {
             Get.to(const StoreHome());
             // Navigator.of(context).pushNamed('EazyPizyStore.routeName');
           },
-          backgroundColor: Theme.of(context).primaryColor,
-          elevation: 2,
+          // backgroundColor: Colors.blueAccent,
+          elevation: 5,
           tooltip: 'Increment',
           child: const Icon(Icons.store),
         ),
@@ -103,39 +103,40 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       navBarItemList.add(buildNavBarItem(_iconList[i], i));
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: navBarItemList,
     );
   }
 
+
+
+
   Widget buildNavBarItem(IconData icon, int index) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 0.5,
-      child: GestureDetector(
-        onTap: () {
-          widget.onChange(index);
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        child: Container(
-          height: 60,
-          width: (MediaQuery.of(context).size.width / _iconList.length) - 30,
-          margin: const EdgeInsets.only(left: 15, right: 15),
-          decoration: index == _selectedIndex
-              ? const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 3,
-                      color: Colors.blue,
-                    ),
+    return GestureDetector(
+      onTap: () {
+        widget.onChange(index);
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        height: 60,
+        width: ((MediaQuery.of(context).size.width) / _iconList.length) - 30,
+        // margin: const EdgeInsets.only( right: 30, ),
+        decoration: index == _selectedIndex
+            ? const BoxDecoration(
+                // color: Colors.green,
+                border: Border(
+                  top: BorderSide(
+                    width: 3,
+                    color: Colors.blueAccent,
                   ),
-                )
-              : const BoxDecoration(),
-          child: Icon(
-            icon,
-            color: index == _selectedIndex ? Colors.blueAccent : Colors.grey,
-          ),
+                ),
+              )
+            : const BoxDecoration(),
+        child: Icon(
+          icon,
+          color: index == _selectedIndex ? Colors.blueAccent : Colors.grey,
         ),
       ),
     );

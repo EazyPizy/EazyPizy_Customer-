@@ -25,9 +25,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
+
                 SliverAppBar(
                   elevation: 0.5,
-                  backgroundColor: EazyColors.appBarBG,
+                  backgroundColor: EazyColors.white,
                   pinned: true,
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,15 +47,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  //  expandedHeight: 330,
-                  // flexibleSpace:  const FlexibleSpaceBar(
-                  //
-                  //   // centerTitle: true,
-                  //
-                  //   background: HomeBanner(),
-                  //
-                  //
-                  // ),
+
                 ),
                 const SliverToBoxAdapter(
                   child: Padding(
@@ -77,6 +70,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 //   const SizedBox()
                 // else
                 SliverPersistentHeader(
+
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
                     TabBar(
@@ -100,8 +94,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       // ],
                     ),
                   ),
+
                 ),
+
+
               ];
+
+
             },
             body: controller.loading
                 ? const Center(
@@ -171,4 +170,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return false;
   }
+
+
 }

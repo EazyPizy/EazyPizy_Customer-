@@ -20,78 +20,78 @@ class _CategoryListState extends State<CategoryList> {
   Widget build(BuildContext context) {
     // return Scaffold(body: ListView.separated());
     return Scaffold(
-        // appBar: AppBar(
-        //   title:  Text('ServiceCat', style: Get.textTheme.titleMedium,),
-        // ),
-        body: CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          expandedHeight: 50,
-          // backgroundColor: Colors.orange,
-          pinned: true,
-          // floating: false,
-          // snap: true,
-          //   title:  Text(
-          // 'Home Servicesss',
-          //   style: Get.textTheme.headlineMedium,
-          // ),
-          flexibleSpace: FlexibleSpaceBar(
-            background: Container(
-              color: Colors.white,
-            ),
-
-            title: AnimatedOpacity(
-              duration: const Duration(milliseconds: 100),
-              opacity: top <= 130 ? 1.0 : 0.0,
-              child: Row(
-                children: [
-                  Text(
-                    'Home Servicesss',
-                    style: Get.textTheme.headlineMedium,
-                  )
-                ],
+      // appBar: AppBar(
+      //   title:  Text('ServiceCat', style: Get.textTheme.titleMedium,),
+      // ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 50,
+            // backgroundColor: Colors.orange,
+            pinned: true,
+            // floating: false,
+            // snap: true,
+            //   title:  Text(
+            // 'Home Servicesss',
+            //   style: Get.textTheme.headlineMedium,
+            // ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                color: Colors.white,
               ),
-            ),
-         ),
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              const EazyNetworkImage(
-                url:
-                    'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
-                child:
-                    'https://thumbs.dreamstime.com/b/person-gray-photo-placeholder-man-shirt-white-background-person-gray-photo-placeholder-man-132818487.jpg',
-              ),
-              SizedBox(
-                height: 40,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  separatorBuilder: (context, index) => Space.horizontal(10.w),
-                  itemBuilder: (context, index) => _CategoryTabItem(
-                    isActive: index == 0,
-                    label: 'Cat $index',
-                    onTap: () {},
-                  ),
+              title: AnimatedOpacity(
+                duration: const Duration(milliseconds: 100),
+                opacity: top <= 130 ? 1.0 : 0.0,
+                child: Row(
+                  children: [
+                    Text(
+                      'Home Servicesss',
+                      style: Get.textTheme.headlineMedium,
+                    )
+                  ],
                 ),
               ),
-              SizedBox(
-                child: Expanded(
-                  child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 10,
-                    separatorBuilder: (context, index) => Space.vertical(10.h),
-                    itemBuilder: (context, index) => const _EazyMenTile(),
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
-      ],
-    ));
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const EazyNetworkImage(
+                  url:
+                      'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
+                ),
+                SizedBox(
+                  height: 40,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    separatorBuilder: (context, index) =>
+                        Space.horizontal(10.w),
+                    itemBuilder: (context, index) => _CategoryTabItem(
+                      isActive: index == 0,
+                      label: 'Cat $index',
+                      onTap: () {},
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  child: Expanded(
+                    child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      separatorBuilder: (context, index) =>
+                          Space.vertical(10.h),
+                      itemBuilder: (context, index) => const _EazyMenTile(),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -196,4 +196,3 @@ class _CategoryTabItem extends StatelessWidget {
     );
   }
 }
-

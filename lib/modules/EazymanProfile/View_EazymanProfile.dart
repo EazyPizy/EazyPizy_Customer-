@@ -5,11 +5,11 @@ import 'package:eazymen_customer/modules/EazymanProfile/components/ViewCart_Bott
 import 'package:eazymen_customer/modules/EazymanProfile/ctrl_profile.dart';
 import 'package:eazymen_customer/modules/home/models/model_home.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
+import 'package:eazymen_customer/widgets/eazy_networkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class EazymanProfile extends StatelessWidget {
   const EazymanProfile({super.key, required this.eazyMen});
@@ -69,14 +69,16 @@ class EazymanProfile extends StatelessWidget {
                                     'Amit Bairwa',
                                     style: Get.textTheme.headlineMedium,
                                   ),
-                                )
+                                ),
+                                CircleAvatar(
+                                  backgroundImage: const EazyNetworkImage(
+                                    url:
+                                        'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29',
+                                  ) as ImageProvider,
+                                  child: const VisitingCard(),
+                                ),
                               ],
                             ),
-                            const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
-                            ),
-                            child: VisitingCard(),
                           ),
                         );
                       },

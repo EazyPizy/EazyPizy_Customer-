@@ -18,20 +18,23 @@ class EazyMenModel {
     this.deviceInfo,
   });
   factory EazyMenModel.fromJson(Map<String, dynamic> json) => EazyMenModel(
-        personalDetail: json['Personal_Detail'] == null
-            ? []
-            : List<PersonalDetail>.from(
-                json['Personal_Detail']!
-                        .map((e) => PersonalDetail.fromJson(e as DynamicMap))
-                    as Iterable,
-              ),
-        bankDetails: json['BankDetails'] == null
-            ? []
-            : List<BankDetail>.from(
-                json['BankDetails']!
-                        .map((e) => BankDetail.fromJson(e as DynamicMap))
-                    as Iterable,
-              ),
+        personalDetail:
+            PersonalDetail.fromJson(json['Personal_Detail'][0] as DynamicMap),
+        //  == null
+        //     ? []
+        //     : List<PersonalDetail>.from(
+        //         json['Personal_Detail']!
+        //                 .map((e) => PersonalDetail.fromJson(e as DynamicMap))
+        //             as Iterable,
+        //       ),
+        bankDetails: BankDetail.fromJson(json['BankDetails'][0] as DynamicMap),
+        //  == null
+        //     ? []
+        //     : List<BankDetail>.from(
+        //         json['BankDetails']!
+        //                 .map((e) => BankDetail.fromJson(e as DynamicMap))
+        //             as Iterable,
+        //       ),
         eazyManUid: json['EazyMan_UID'] as String?,
         dateOfRegistration: json['Date_Of_Registration'] as String?,
         lastActive: json['Last_Active'] as String?,
@@ -61,8 +64,8 @@ class EazyMenModel {
               ),
       );
 
-  final List<PersonalDetail>? personalDetail;
-  final List<BankDetail>? bankDetails;
+  final PersonalDetail? personalDetail;
+  final BankDetail? bankDetails;
   final String? eazyManUid;
   final String? dateOfRegistration;
   final String? lastActive;
@@ -73,12 +76,14 @@ class EazyMenModel {
   final List<DeviceInfo>? deviceInfo;
 
   Map<String, dynamic> toJson() => {
-        'Personal_Detail': personalDetail == null
-            ? []
-            : List<dynamic>.from(personalDetail!.map((x) => x.toJson())),
-        'BankDetails': bankDetails == null
-            ? []
-            : List<dynamic>.from(bankDetails!.map((x) => x.toJson())),
+        'Personal_Detail': [personalDetail?.toJson()],
+        //  personalDetail == null
+        //     ? []
+        //     : List<dynamic>.from(personalDetail!.map((x) => x.toJson())),
+        'BankDetails': [bankDetails?.toJson()],
+        // bankDetails == null
+        //     ? []
+        //     : List<dynamic>.from(bankDetails!.map((x) => x.toJson())),
         'EazyMan_UID': eazyManUid,
         'Date_Of_Registration': dateOfRegistration,
         'Last_Active': lastActive,

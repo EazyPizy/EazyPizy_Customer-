@@ -146,7 +146,7 @@ class EazyMenTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          eazyMan.personalDetail?[0].firstName ?? '',
+                          eazyMan.personalDetail?.firstName ?? '',
                           style: Get.textTheme.titleLarge,
                           softWrap: true,
                           overflow: TextOverflow.fade,

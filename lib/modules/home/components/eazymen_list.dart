@@ -146,7 +146,7 @@ class EazyMenTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Amit Bairwa',
+                          eazyMan.personalDetail?[0].firstName ?? '',
                           style: Get.textTheme.titleLarge,
                           softWrap: true,
                           overflow: TextOverflow.fade,

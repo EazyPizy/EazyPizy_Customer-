@@ -2,6 +2,8 @@
 //
 //     final subServiceModel = subServiceModelFromJson(jsonString);
 
+import 'package:eazymen_customer/core/typedefs.dart';
+
 class SubServiceModel {
   SubServiceModel({
     this.subServiceName,
@@ -40,4 +42,12 @@ class SubServiceModel {
             ? []
             : List<dynamic>.from(serviceId!.map((x) => x)),
       };
+
+  static List<SubServiceModel> jsonListToObject(List data) {
+    final temp = <SubServiceModel>[];
+    for (final element in data) {
+      temp.add(SubServiceModel.fromJson(element.data() as DynamicMap));
+    }
+    return temp;
+  }
 }

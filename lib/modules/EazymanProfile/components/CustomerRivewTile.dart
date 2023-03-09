@@ -16,17 +16,23 @@ class CustomerReviewTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EasyContainer(
-      borderRadius: 10,
-      borderColor: Colors.green,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Row(
-          children: [
-            const CircleAvatar(),
-            Text('$index Best Service', style: Get.textTheme.labelSmall),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 120,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            children: [
+              const CircleAvatar(),
+              Text('$index Best Service', style: Get.textTheme.labelSmall),
+            ],
+          ),
         ),
       ),
     );

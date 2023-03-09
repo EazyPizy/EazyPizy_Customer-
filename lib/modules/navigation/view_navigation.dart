@@ -3,6 +3,7 @@ import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
 import 'package:eazymen_customer/modules/CustomerProfile/View_Customer_Profile.dart';
 import 'package:eazymen_customer/modules/category/view_category.dart';
 import 'package:eazymen_customer/modules/home/view_home.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,8 @@ class _NavigationViewState extends State<NavigationView> {
   final List<Widget> _pages = [
     const HomeView(),
     const CategoryView(),
+    const StoreHome(),
+
     const ViewCart(),
     const CustomerProfile(),
   ];
@@ -31,35 +34,32 @@ class _NavigationViewState extends State<NavigationView> {
       },
       child: Scaffold(
         body: _pages[_selectedPageIndex],
-        bottomNavigationBar: BottomAppBar(
-          notchMargin: 5,
-          shape: const CircularNotchedRectangle(),
-          child: CustomBottomNavigationBar(
-            iconList: const [
-              Icons.home,
-              Icons.category_rounded,
-          //    Icons.cake_sharp,
-              Icons.shopping_cart,
-              Icons.person,
-            ],
-            onChange: (index) {
-              setState(() {
-                _selectedPageIndex = index;
-              });
-            },
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.to(const StoreHome());
-            // Navigator.of(context).pushNamed('EazyPizyStore.routeName');
+        bottomNavigationBar: CustomBottomNavigationBar(
+          iconList: const [
+            Icons.home,
+            Icons.category_rounded,
+            Icons.store,
+            Icons.shopping_cart,
+            Icons.person,
+          ],
+          onChange: (index) {
+            setState(() {
+              _selectedPageIndex = index;
+            });
           },
-          // backgroundColor: Colors.blueAccent,
-          elevation: 5,
-          tooltip: 'Increment',
-          child: const Icon(Icons.store),
         ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     Get.to(const StoreHome());
+        //     // Navigator.of(context).pushNamed('EazyPizyStore.routeName');
+        //   },
+        //   // backgroundColor: Colors.blueAccent,
+        //   elevation: 5,
+        //
+        //   tooltip: 'Increment',
+        //  child: const Icon(Icons.store),
+        // ),
       ),
     );
   }
@@ -103,7 +103,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       navBarItemList.add(buildNavBarItem(_iconList[i], i));
     }
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: navBarItemList,
     );
   }
@@ -122,21 +122,21 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       child: Container(
         height: 60,
         width: ((MediaQuery.of(context).size.width) / _iconList.length) - 30,
-        // margin: const EdgeInsets.only( right: 30, ),
+        margin: const EdgeInsets.only( right: 15, left: 15),
         decoration: index == _selectedIndex
             ? const BoxDecoration(
                 // color: Colors.green,
                 border: Border(
                   top: BorderSide(
                     width: 3,
-                    color: Colors.blueAccent,
+                    color: EazyColors.dummy,
                   ),
                 ),
               )
             : const BoxDecoration(),
         child: Icon(
           icon,
-          color: index == _selectedIndex ? Colors.blueAccent : Colors.grey,
+          color: index == _selectedIndex ? EazyColors.dummy : Colors.grey,
         ),
       ),
     );

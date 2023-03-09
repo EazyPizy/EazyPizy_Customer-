@@ -1,15 +1,19 @@
 import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/components/CustomerRivewTile.dart';
+import 'package:eazymen_customer/modules/EazymanProfile/components/Easyman_ServiceCard.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/components/EazyMan_Info_Card.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/components/ViewCart_Bottom_Navigation.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/ctrl_profile.dart';
 import 'package:eazymen_customer/modules/home/models/model_home.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
 import 'package:eazymen_customer/widgets/eazy_networkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../home/components/simmerLoader.dart';
 
 class EazymanProfile extends StatelessWidget {
   const EazymanProfile({super.key, required this.eazyMen});
@@ -21,6 +25,7 @@ class EazymanProfile extends StatelessWidget {
     var top = 0.0;
     // final controller = Get.put();
     return Scaffold(
+      backgroundColor: EazyColors.white,
       body: GetBuilder<ProfileController>(
         init: ProfileController(eazyMen),
         builder: (controller) {
@@ -32,15 +37,16 @@ class EazymanProfile extends StatelessWidget {
                 return <Widget>[
                   SliverAppBar(
                     elevation: 0.5,
+
                     backgroundColor: Colors.white,
-                    automaticallyImplyLeading: false,
+                    automaticallyImplyLeading: true,
                     pinned: true,
                     // title: Text("Plumber",
                     // style: TextStyle(
                     //   color: Colors.black
                     // ),
                     // ),
-                    expandedHeight: 250,
+                    expandedHeight: 210,
                     flexibleSpace: LayoutBuilder(
                       builder: (ctx, cons) {
                         top = cons.biggest.height;
@@ -53,7 +59,7 @@ class EazymanProfile extends StatelessWidget {
                             child: Row(
                               children: [
                                 SizedBox(
-                                  width: 12.w,
+                                  width: 55.w,
                                 ),
                                 const CircleAvatar(
                                   backgroundImage: NetworkImage(
@@ -66,30 +72,32 @@ class EazymanProfile extends StatelessWidget {
                                 InkWell(
                                   onTap: controller.getUserSubServices,
                                   child: Text(
-                                    'Amit Bairwa',
+                                    eazyMen.personalDetail?.firstName ?? '',
                                     style: Get.textTheme.headlineMedium,
                                   ),
                                 ),
-                                CircleAvatar(
-                                  backgroundImage: const EazyNetworkImage(
-                                    url:
-                                        'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29',
-                                  ) as ImageProvider,
-                                  child: const VisitingCard(),
-                                ),
                               ],
                             ),
+                          ),
+                          background: Column(
+                            children: [
+                              SizedBox(
+                                height: 75.h,
+                              ),
+                              VisitingCard(
+                                eazyMenModel: eazyMen,
+                              ),
+                            ],
                           ),
                         );
                       },
                     ),
                   ),
-
                   SliverToBoxAdapter(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
@@ -102,43 +110,33 @@ class EazymanProfile extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 50,
+                          height: 65.h,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 10,
-                            itemBuilder: (context, i) => CustomerReviewTile(
-                              index: i,
-                            ),
+                            itemBuilder: (context, i) =>
+                                CustomerReviewTile(
+                                  index: i,
+                                ),
                           ),
                         )
                       ],
                     ),
                   ),
-                  // SliverToBoxAdapter(
-                  //     child: SizedBox(
-                  //   height: 50,
-                  //   child: ListView.builder(
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemCount: 100,
-                  //       itemBuilder: (context, i) => Card(
-                  //           elevation: 1,
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.all(8),
-                  //             child: Center(child: Text(' $i Best Review')),
-                  //           ))),
-                  // )),
                   SliverPersistentHeader(
                     pinned: true,
                     delegate: _SliverAppBarDelegate(
                       TabBar(
-                        labelColor: Colors.black87,
+                        labelColor: EazyColors.dummy,
                         unselectedLabelColor: Colors.grey,
+                        indicatorColor: EazyColors.dummy,
                         tabs: controller.userCategories
                             .map(
-                              (e) => Tab(
+                              (e) =>
+                              Tab(
                                 text: e.serviceName,
                               ),
-                            )
+                        )
                             .toList(),
                       ),
                     ),
@@ -147,47 +145,56 @@ class EazymanProfile extends StatelessWidget {
               },
               body: controller.loading
                   ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
+                  child: ShimmerLoader()
+              )
                   : TabBarView(
-                      // controller: controller.tabController,
-                      children: controller.userCategories
-                          .map(
-                            (e) => ListView.builder(
-                              shrinkWrap: true,
-                              // physics: const NeverScrollableScrollPhysics(),
-                              itemCount:
-                                  controller.userSubServiceCategories.length,
-
-                              itemBuilder: (context, index) => Column(
+                // controller: controller.tabController,
+                children: controller.userCategories
+                    .map(
+                      (e) =>
+                      ListView.separated(
+                          shrinkWrap: true,
+                          // physics: const NeverScrollableScrollPhysics(),
+                          itemCount:
+                          controller.userSubServiceCategories.length,
+                          itemBuilder: (context, index) =>
+                              Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    controller.userSubServiceCategories[index]
-                                            .subServiceName ??
-                                        '',
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8, right: 8),
+                                    child: Text(
+                                      controller
+                                          .userSubServiceCategories[
+                                      index]
+                                          .subServiceName ??
+                                          '',
+                                      style: Get.textTheme.titleLarge,
+                                    ),
                                   ),
-                                  SizedBox(
-                                    height: 100,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      const NeverScrollableScrollPhysics(),
                                       itemCount: controller
                                           .getSubServiceProduct(
-                                            controller.userSubServiceCategories[
-                                                index],
-                                          )
+                                        controller
+                                            .userSubServiceCategories[
+                                        index],
+                                      )
                                           .length,
                                       itemBuilder: (context, _) {
-                                        // return const EazymanServiceCard();
-                                        return Text(
-                                          controller
-                                                  .getSubServiceProduct(
-                                                    controller
-                                                            .userSubServiceCategories[
-                                                        index],
-                                                  )[_]
-                                                  .serviceProductName ??
+                                        return EazymanServiceCard(
+                                          serviceProdName: controller
+                                              .getSubServiceProduct(
+                                            controller
+                                                .userSubServiceCategories[
+                                            index],
+                                          )[_]
+                                              .serviceProductName ??
                                               '',
                                         );
                                       },
@@ -195,14 +202,15 @@ class EazymanProfile extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),
-                          )
-                          .toList(),
-                      // body: ListView.builder(
-                      //   itemCount: 10,
-                      //   itemBuilder: (context, i) => const EazymanServiceCard(),
-                      // ),
-                    ),
+                          separatorBuilder:
+                              (BuildContext context, int index) =>
+                              Divider(
+                                color: Colors.grey.shade50,
+                                thickness: 5,
+                              )),
+                )
+                    .toList(),
+              ),
             ),
           );
         },
@@ -226,11 +234,9 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+  Widget build(BuildContext context,
+      double shrinkOffset,
+      bool overlapsContent,) {
     return ColoredBox(
       color: Colors.white,
       child: _tabBar,
@@ -309,10 +315,11 @@ Future viewAllReviews() {
                       unratedColor: Colors.amber.withAlpha(50),
                       itemSize: 15,
                       itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-                      itemBuilder: (context, _) => Icon(
-                        selectedIcon ?? Icons.star,
-                        color: Colors.green,
-                      ),
+                      itemBuilder: (context, _) =>
+                          Icon(
+                            selectedIcon ?? Icons.star,
+                            color: Colors.green,
+                          ),
                       onRatingUpdate: (rating) {
                         // setState(() {
                         //   _rating = rating;

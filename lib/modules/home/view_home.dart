@@ -1,5 +1,6 @@
 import 'package:eazymen_customer/modules/home/components/banner.dart';
 import 'package:eazymen_customer/modules/home/components/eazymen_list.dart';
+import 'package:eazymen_customer/modules/home/components/simmerLoader.dart';
 import 'package:eazymen_customer/modules/home/ctrl_home.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -20,22 +21,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       init: HomeController(this),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: EazyColors.background,
+          // backgroundColor: EazyColors.background,
           body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-
                 SliverAppBar(
                   elevation: 0.5,
-                  backgroundColor: EazyColors.white,
+                  // backgroundColor: EazyColors.white,
                   pinned: true,
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        'Hanyman Near You,',
+                        'Handyman Near You,',
                         style: Get.textTheme.titleMedium,
                       ),
                       //  style: Get.textTheme.bodySmall,
@@ -47,7 +47,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-
                 ),
                 const SliverToBoxAdapter(
                   child: Padding(
@@ -70,7 +69,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 //   const SizedBox()
                 // else
                 SliverPersistentHeader(
-
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
                     TabBar(
@@ -78,8 +76,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       // onTap: (value) {
                       //   controller.tabController.notifyListeners();
                       // },
-                      labelColor: Colors.black87,
-                      unselectedLabelColor: Colors.grey, isScrollable: true,
+                      labelColor: EazyColors.dummy,
+                      unselectedLabelColor: Colors.grey,
+                      indicatorColor: EazyColors.dummy,
+                      isScrollable: true,
                       tabs: controller.categories
                           .map(
                             (e) => Tab(
@@ -87,25 +87,20 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             ),
                           )
                           .toList(),
-                      // tabs: [
-                      //   Tab(text: 'Near You'),
-                      //   Tab(text: 'Plumber'),
-                      //   Tab(text: 'AC Technician'),
-                      // ],
                     ),
                   ),
-
                 ),
-
-
               ];
-
-
             },
             body: controller.loading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                ?  const ShimmerLoader()
+            // ListView.builder(
+            //   // shrinkWrap: true,
+            //   // physics: const NeverScrollableScrollPhysics(),
+            //     itemCount: controller.eazyMen.length,
+            //     itemBuilder: (context, index) =>
+            //         const ShimmerLoader())
+            //const ShimmerLoader()
                 : controller.eazyMen.isEmpty
                     ? const Center(
                         child: Text('Empty'),
@@ -115,13 +110,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         children: controller.categories
                             .map(
                               (e) => ListView.builder(
-                                // shrinkWrap: true,
-                                // physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.eazyMen.length,
-
-                                itemBuilder: (context, index) =>
-                                    EazyMenTile(controller.eazyMen[index]),
-                              ),
+                                  // shrinkWrap: true,
+                                  // physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: controller.eazyMen.length,
+                                  itemBuilder: (context, index) =>
+                                      EazyMenTile(controller.eazyMen[index]),),
                             )
                             .toList(),
                         // children: [
@@ -170,6 +163,4 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return false;
   }
-
-
 }

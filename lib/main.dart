@@ -1,4 +1,5 @@
 import 'package:eazymen_customer/core/pages.dart';
+import 'package:eazymen_customer/core/services/category_services.dart';
 import 'package:eazymen_customer/modules/navigation/view_navigation.dart';
 import 'package:eazymen_customer/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,6 +18,7 @@ void main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Get.putAsync(() => CategoryService().init());
   runApp(const MyApp());
 }
 

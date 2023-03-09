@@ -1,7 +1,5 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eazymen_customer/core/logger.dart';
+import 'package:eazymen_customer/core/services/category_services.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/model_subService_product.dart';
 import 'package:eazymen_customer/modules/home/ctrl_home.dart';
 import 'package:eazymen_customer/modules/home/models/main_category.dart';
@@ -14,7 +12,7 @@ class ProfileController extends GetxController {
   ProfileController(this.eazyMen);
   final EazyMenModel eazyMen;
   final List<MainCategoryModel> mainCategories =
-      Get.find<HomeController>().categories;
+      CategoryService.instance.mainServiceCategories;
 
   late final List<MainCategoryModel> userCategories;
   final List<SubServiceModel> userSubServiceCategories = [];
@@ -43,22 +41,26 @@ class ProfileController extends GetxController {
         _log.i('Empty main Category');
         return;
       }
-      final data = await FirebaseFirestore.instance
-          .collection('SubServiceCategory')
-          .where(
-            'SubServiceID',
-            whereIn: eazyMen.subServices,
-            // arrayContains: Get.find<HomeController>()
-            //     .categories
-            //     .map((e) => e.serviceId)
-            //     .toList(),
-            // arrayContains: [userCategories[0].serviceId],
-          )
-          .get();
+      // final data = await FirebaseFirestore.instance
+      //     .collection('SubServiceCategory')
+      //     .where(
+      //       'SubServiceID',
+      //       whereIn: eazyMen.subServices,
+      //       // arrayContains: Get.find<HomeController>()
+      //       //     .categories
+      //       //     .map((e) => e.serviceId)
+      //       //     .toList(),
+      //       // arrayContains: [userCategories[0].serviceId],
+      //     )
+      //     .get();
 
-      print(data.docs);
-      for (final element in data.docs) {
-        userSubServiceCategories.add(SubServiceModel.fromJson(element.data()));
+      final data = CategoryService.instance.subServiceCategories;
+
+      // print(data.docs);
+      for (final element in data) {
+        if (eazyMen.subServices!.contains(element.subServiceId)) {
+          userSubServiceCategories.add(element);
+        }
       }
     } catch (e) {
       _log.e(e.toString());
@@ -70,23 +72,28 @@ class ProfileController extends GetxController {
 
   Future<void> getUserServiceProducts() async {
     print(eazyMen.subServiceProdcuts);
-    final data = await FirebaseFirestore.instance
-        .collection('ServiceProducts')
-        .where(
-          'ServiceProductID',
-          whereIn: eazyMen.subServiceProdcuts,
-          // arrayContains: Get.find<HomeController>()
-          //     .categories
-          //     .map((e) => e.serviceId)
-          //     .toList(),
-          // arrayContains: [userCategories[0].serviceId],
-        )
-        .get();
+    // final data = await FirebaseFirestore.instance
+    //     .collection('ServiceProducts')
+    //     .where(
+    //       'ServiceProductID',
+    //       whereIn: eazyMen.subServiceProdcuts,
+    //       // arrayContains: Get.find<HomeController>()
+    //       //     .categories
+    //       //     .map((e) => e.serviceId)
+    //       //     .toList(),
+    //       // arrayContains: [userCategories[0].serviceId],
+    //     )
+    //     .get();
 
-    print(jsonEncode(data.docs[0].data()));
-    for (final element in data.docs) {
-      userSubServiceProducts
-          .add(SubServiceProductModel.fromJson(element.data()));
+    final data = CategoryService.instance.serviceProducts;
+
+    // print(jsonEncode(data.docs[0].data()));
+    for (final element in eazyMen.subServiceProdcuts ?? []) {
+      userSubServiceProducts.add(
+        data.firstWhere(
+          (serviceProduct) => serviceProduct.serviceProductId == element,
+        ),
+      );
     }
     update();
   }

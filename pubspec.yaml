@@ -44,6 +44,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   order_tracker: ^0.0.2
   google_fonts: ^4.0.3
+  shimmer: ^2.0.0
 
   cached_network_image: ^3.2.3
   flutter_adaptive_scaffold: ^0.1.0

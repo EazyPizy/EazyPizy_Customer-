@@ -8,37 +8,31 @@ import '../../../theme/app_colors.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
 
 class EazymanServiceCard extends StatelessWidget {
-  const EazymanServiceCard({super.key});
+  const EazymanServiceCard({
+    super.key,
+    required this.serviceProdName,
+  });
 
   // final ProductModel product;
+
+  final String serviceProdName;
+
+  // final String serviceProdID;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(bottom: 8.0),
           child: EasyContainer(
             elevation: 0.5,
-            height: 250,
-            color: Colors.white,
-            // width: double.infinity,
-
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const EazymanProfile()),
-              // );
-            },
-            // customPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            //  borderRadius: 16.r,
+            padding: 8,
+            color: EazyColors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-
-
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
@@ -62,19 +56,23 @@ class EazymanServiceCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Window AC',
-                                style: Get.textTheme.titleLarge,
+                                serviceProdName,
+                                style: Get.textTheme.titleMedium,
                                 softWrap: true,
                                 overflow: TextOverflow.fade,
                               ),
+                              // Spacer(),
 
-                              Text('499', style: Get.textTheme.titleLarge,
+                              Text(
+                                '499',
+                                style: Get.textTheme.titleMedium,
                                 softWrap: true,
-                                overflow: TextOverflow.fade,),
+                                overflow: TextOverflow.fade,
+                              ),
                             ],
                           ),
                           Row(
@@ -84,14 +82,14 @@ class EazymanServiceCard extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 4.0),
                                 child: Text(
-                                  'AC Technician ',
+                                  'AC Service',
                                   style: Get.textTheme.titleSmall,
                                   softWrap: true,
                                   overflow: TextOverflow.fade,
                                 ),
                               ),
                               const SizedBox(
-                                width: 8,
+                                width: 18,
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 4),
@@ -152,26 +150,18 @@ class EazymanServiceCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                   // Spacer(),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.end,
-                    //     mainAxisAlignment: MainAxisAlignment.end,
-                    //     children: [
-                    //     //  Text('499'),
-                    //      // Text('499'),
-                    //       OutlinedButton(
+                    // Spacer(),
+                    //  Padding(
+                    //    padding: const EdgeInsets.all(8.0),
+                    //    child: OutlinedButton(
                     //
-                    //         onPressed: () {},
-                    //         child: Text(
-                    //           'ADD',
-                    //           style: Get.textTheme.labelSmall,
-                    //         ),
-                    //       )
-                    //   ],
-                    //   ),
-                    // )
+                    //      onPressed: () {},
+                    //      child: Text(
+                    //        'ADD',
+                    //        style: Get.textTheme.labelSmall,
+                    //      ),
+                    //    ),
+                    //  )
                   ],
                 ),
                 SizedBox(
@@ -183,8 +173,8 @@ class EazymanServiceCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
+                    const Padding(
+                      padding: EdgeInsets.all(3),
                       child: Icon(
                         Icons.circle,
                         size: 10,
@@ -201,15 +191,15 @@ class EazymanServiceCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
+                    const Padding(
+                      padding: EdgeInsets.all(3),
                       child: Icon(
                         Icons.circle,
                         size: 10,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(3.0),
+                      padding: const EdgeInsets.all(3),
                       child: Text(
                         'Jet-Pump AC Service of AC Filter, Indoor and Out door',
                         style: Get.textTheme.titleSmall,
@@ -219,15 +209,15 @@ class EazymanServiceCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
+                    const Padding(
+                      padding: EdgeInsets.all(3),
                       child: Icon(
                         Icons.circle,
                         size: 10,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(3.0),
+                      padding: const EdgeInsets.all(3),
                       child: Text(
                         'Jet-Pump AC Service of AC Filter, Indoor and Out door',
                         style: Get.textTheme.titleSmall,

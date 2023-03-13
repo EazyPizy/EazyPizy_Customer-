@@ -10,10 +10,7 @@ class ApplyCoupons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: EazyColors.background,
       appBar: AppBar(
-        elevation: 0.5,
-        backgroundColor: EazyColors.appBarBG,
         title: Text(
           'Coupons and Offers',
           style: Get.textTheme.titleMedium,

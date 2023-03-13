@@ -21,37 +21,48 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       init: HomeController(this),
       builder: (controller) {
         return Scaffold(
-          // backgroundColor: EazyColors.background,
           body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
                   elevation: 0.5,
-                  // backgroundColor: EazyColors.white,
+                  backgroundColor: EazyColors.white,
                   pinned: true,
-                  title: Column(
+                  surfaceTintColor: EazyColors.white,
+                  title: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Handyman Near You,',
-                        style: Get.textTheme.titleMedium,
+                      const Icon(Icons.location_pin),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Handyman Near You,',
+                            style: Get.textTheme.titleSmall,
+                          ),
+                          Text(
+                            'home, H.No C31, Ashok Vihar, Phase 2, Gurgaon',
+                            style: Get.textTheme.titleSmall,
+                            //  style: Get.textTheme.bodySmall,
+                          ),
+                        ],
                       ),
                       //  style: Get.textTheme.bodySmall,
-
-                      Text(
-                        'home, H.No C31, Ashok Vihar, Phase 2, Gurgaon',
-                        style: Get.textTheme.titleMedium,
-                        //  style: Get.textTheme.bodySmall,
-                      ),
                     ],
                   ),
                 ),
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.only(top: 12),
-                    child: HomeBanner(),
+                    child: HomeBanner(
+                      autoPlay: false,
+                      width: double.infinity,
+                    ),
                   ),
                 ),
 
@@ -93,14 +104,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               ];
             },
             body: controller.loading
-                ?  const ShimmerLoader()
-            // ListView.builder(
-            //   // shrinkWrap: true,
-            //   // physics: const NeverScrollableScrollPhysics(),
-            //     itemCount: controller.eazyMen.length,
-            //     itemBuilder: (context, index) =>
-            //         const ShimmerLoader())
-            //const ShimmerLoader()
+                ? ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) => const ShimmerLoader(),
+                  )
                 : controller.eazyMen.isEmpty
                     ? const Center(
                         child: Text('Empty'),
@@ -110,23 +117,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         children: controller.categories
                             .map(
                               (e) => ListView.builder(
-                                  // shrinkWrap: true,
-                                  // physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: controller.eazyMen.length,
-                                  itemBuilder: (context, index) =>
-                                      EazyMenTile(controller.eazyMen[index]),),
+                                // shrinkWrap: true,
+                                // physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.eazyMen.length,
+                                itemBuilder: (context, index) =>
+                                    EazyMenTile(controller.eazyMen[index]),
+                              ),
                             )
                             .toList(),
-                        // children: [
-                        //   ListView.builder(
-                        //     // shrinkWrap: true,
-                        //     // physics: const NeverScrollableScrollPhysics(),
-                        //     itemCount: controller.eazyMen.length,
-
-                        //     itemBuilder: (context, index) =>
-                        //         EazyMenTile(controller.eazyMen[index]),
-                        //   ),
-                        // ],
                       ),
             // body: const EazyMenList(),
           ),

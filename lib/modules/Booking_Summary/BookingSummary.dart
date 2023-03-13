@@ -13,12 +13,7 @@ class BookingSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: EazyColors.background,
-      //EazyColors.black,
       appBar: AppBar(
-        //   automaticallyImplyLeading: false,
-        elevation: 0.5,
-        backgroundColor: EazyColors.primary,
         title: Text('Booking Summary', style: Get.textTheme.headlineMedium),
       ),
       body: SingleChildScrollView(
@@ -30,7 +25,7 @@ class BookingSummary extends StatelessWidget {
             ),
             EasyContainer(
               //height: 400,
-              color: EazyColors.primary,
+              color: EazyColors.white,
               borderRadius: 10,
               borderWidth: 2,
               child: Column(
@@ -53,7 +48,7 @@ class BookingSummary extends StatelessWidget {
                     height: 20,
                   ),
                   ListTile(
-                    tileColor: EazyColors.primary,
+                    tileColor: EazyColors.white,
                     minLeadingWidth: 8,
                     minVerticalPadding: 15,
                     title: Text('AC Service and Repair',

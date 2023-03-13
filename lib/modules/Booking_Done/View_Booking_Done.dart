@@ -8,7 +8,6 @@ class ViewBookingDone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: EazyColors.background,
       body: Center(
         child: Text('Booking Done',
           style: Get.textTheme.titleMedium,

@@ -23,7 +23,6 @@ class EazymanProfile extends StatelessWidget {
     var top = 0.0;
     // final controller = Get.put();
     return Scaffold(
-      backgroundColor: EazyColors.white,
       body: GetBuilder<ProfileController>(
         init: ProfileController(eazyMen),
         builder: (controller) {
@@ -34,9 +33,9 @@ class EazymanProfile extends StatelessWidget {
                   (BuildContext context, bool innerBoxIsScrolled) {
                 return <Widget>[
                   SliverAppBar(
-                    elevation: 0.5,
+                    surfaceTintColor: EazyColors.white,
+                    // backgroundColor: EazyColors.background,
 
-                    backgroundColor: Colors.white,
                     pinned: true,
                     // title: Text("Plumber",
                     // style: TextStyle(
@@ -91,32 +90,35 @@ class EazymanProfile extends StatelessWidget {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Top Reviews'),
-                              TextButton(
-                                onPressed: viewAllReviews,
-                                child: Text('View All'),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 65.h,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context, i) => CustomerReviewTile(
-                              index: i,
+                    child: EasyContainer(
+                      color: EazyColors.white,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text('Top Reviews'),
+                                TextButton(
+                                  onPressed: viewAllReviews,
+                                  child: Text('View All'),
+                                )
+                              ],
                             ),
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: 65.h,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 10,
+                              itemBuilder: (context, i) => CustomerReviewTile(
+                                index: i,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SliverPersistentHeader(
@@ -266,7 +268,7 @@ Widget customButtons() {
   );
 }
 
-Future viewAllReviews() {
+Future<void> viewAllReviews() {
   late final ratingController;
   late double rating;
 

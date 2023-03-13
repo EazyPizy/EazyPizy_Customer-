@@ -16,7 +16,7 @@ class StoreHome extends StatefulWidget {
   State<StoreHome> createState() => _StoreHomeState();
 }
 
-double top = 0.0;
+double top = 0;
 
 class _StoreHomeState extends State<StoreHome> {
   @override
@@ -29,8 +29,8 @@ class _StoreHomeState extends State<StoreHome> {
             //  title: Text('EazyPizy Store', style: Get.textTheme.titleMedium),
             elevation: 0.5,
             pinned: true,
-            backgroundColor: EazyColors.white,
             expandedHeight: 320,
+            surfaceTintColor: EazyColors.white,
             flexibleSpace: LayoutBuilder(
               builder: (ctx, cons) {
                 top = cons.biggest.height;
@@ -177,7 +177,7 @@ class _StoreHomeState extends State<StoreHome> {
                   ),
                 ),
                 Space.vertical(12.h),
-                const HomeBanner(),
+                const HomeBanner(autoPlay: true,width: double.infinity,),
                 Space.vertical(12.h),
                 const Divider(
                   thickness: 15,

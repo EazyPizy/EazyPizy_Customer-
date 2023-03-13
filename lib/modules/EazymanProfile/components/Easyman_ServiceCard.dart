@@ -24,11 +24,12 @@ class EazymanServiceCard extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 8),
           child: EasyContainer(
             elevation: 0.5,
             padding: 8,
             color: EazyColors.white,
+            showBorder: false,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -36,14 +37,10 @@ class EazymanServiceCard extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.blueAccent.withOpacity(0.50),
-                          ),
-                        ),
+                      child: EasyContainer(
+                        borderColor: EazyColors.borderColors,
+                        showBorder: true,
+                        color: EazyColors.white,
                         height: 75,
                         width: 75,
                         child: Image.network(

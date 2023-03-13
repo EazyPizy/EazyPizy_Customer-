@@ -1,4 +1,5 @@
 import 'package:eazymen_customer/modules/category/view_category_list.dart';
+import 'package:eazymen_customer/modules/home/models/main_category.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/theme/eazy_spaces.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
@@ -7,54 +8,58 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class PopularCategories extends StatelessWidget {
-  const PopularCategories({
+   const PopularCategories({
     super.key,
   });
+  // MainCategoryModel mainCategoryModel;
 
   // final SubCategoriesListModel items;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: 150.h,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-             Text('Popular Categories', style: Get.textTheme.titleLarge),
-            Space.vertical(16.h),
-            Expanded(
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                separatorBuilder: (context, index) => Space.horizontal(16.w),
-                itemBuilder: (context, index) => _CategoryItem(
-                  isActive: index == 0,
-                  label: 'All',
-                  onTap: () {
-                    Get.to(const CategoryList());
-                  },
-                ),
+    return EasyContainer(
+      color: EazyColors.white,
+      padding: 8,
+      height: 180.h,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Popular Categories', style: Get.textTheme.titleLarge),
+          Space.vertical(16.h),
+          Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              separatorBuilder: (context, index) => Space.horizontal(16.w),
+              itemBuilder: (context, index) => CategoryItem(
+                isActive: index == 0,
+                label: 'All',
+                onTap: () {
+                  Get.to(const CategoryList());
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _CategoryItem extends StatelessWidget {
-  const _CategoryItem({
+class CategoryItem extends StatelessWidget {
+    CategoryItem({super.key,
     required this.isActive,
     required this.label,
     required this.onTap,
+
   });
+
   final VoidCallback onTap;
 
   final bool isActive;
   final String label;
+ late  MainCategoryModel mainCategoryModel;
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +81,13 @@ class _CategoryItem extends StatelessWidget {
           ),
           Space.vertical(12.h),
           Text(
-            "Plumber and it's services",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13.sp,
-            ),
+          'mainService',
+
+           // textAlign: TextAlign.center,
+            // style: TextStyle(
+            //   fontWeight: FontWeight.bold,
+            //   fontSize: 13.sp,
+            // ),
           )
         ],
       ),

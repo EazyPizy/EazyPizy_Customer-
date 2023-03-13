@@ -13,8 +13,6 @@ class SelectServiceSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.5,
-        backgroundColor: EazyColors.appBarBG,
         title: Text(
           'Select Slot',
           style: Get.textTheme.headlineMedium,
@@ -27,7 +25,7 @@ class SelectServiceSlot extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const ListTile(
-              tileColor: EazyColors.primary,
+              tileColor: EazyColors.white,
               title: Text('When are you available for Service'),
               subtitle: Text('please select the date and time slot'),
             ),
@@ -40,7 +38,7 @@ class SelectServiceSlot extends StatelessWidget {
             ),
             EasyContainer(
               height: 100,
-              color: EazyColors.primary,
+              color: EazyColors.white,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 30,
@@ -77,7 +75,7 @@ class SelectServiceSlot extends StatelessWidget {
               ),
             ),
             EasyContainer(
-              color: EazyColors.primary,
+              color: EazyColors.white,
               height: 300,
               child: GridView.builder(
                 shrinkWrap: true,

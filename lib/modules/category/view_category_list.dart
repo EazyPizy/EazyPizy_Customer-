@@ -1,10 +1,15 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/theme/eazy_spaces.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
 import 'package:eazymen_customer/widgets/eazy_networkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../EazymanProfile/components/Easyman_ServiceCard.dart';
+import '../home/components/CarouselImage.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
@@ -14,7 +19,20 @@ class CategoryList extends StatefulWidget {
 }
 
 double top = 0;
+final List<String> imageList = [
+  'https://mykit.in/crm/public/uploads/website_section_image/LyOFHmLMIYWEgG8tsBXweUQN7sTCsu.jpg',
+  'https://mykit.in/crm/public/uploads/website_section_image/uZ4cJcyKU1PMyIihywU9qyaWzjojB0.jpg',
+  'https://mykit.in/crm/public/uploads/website_section_image/BPCbXgEuhKDSpPTsAVXNKZKc26GDQo.jpg',
+  // 'https://mykit.in/crm/public/uploads/website_slider_images/lHXqadJX5rvVfDY14xpuhC35hnioqO.jpg'
+];
 
+
+const String assetName = 'assets/svg_Icons/Fridge-optimized.svg';
+final Widget svgIcon = SvgPicture.asset(
+    assetName,
+   // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
+  //  semanticsLabel: 'A red up arrow'
+);
 class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
@@ -26,17 +44,11 @@ class _CategoryListState extends State<CategoryList> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 50,
-            // backgroundColor: Colors.orange,
+           //expandedHeight: 300,
             pinned: true,
-            // floating: false,
-            // snap: true,
-            //   title:  Text(
-            // 'Home Servicesss',
-            //   style: Get.textTheme.headlineMedium,
-            // ),
             flexibleSpace: FlexibleSpaceBar(
-              background: Container(
+              background:
+              Container(
                 color: Colors.white,
               ),
               title: AnimatedOpacity(
@@ -45,7 +57,7 @@ class _CategoryListState extends State<CategoryList> {
                 child: Row(
                   children: [
                     Text(
-                      'Home Servicesss',
+                      'Services Name',
                       style: Get.textTheme.headlineMedium,
                     )
                   ],
@@ -60,32 +72,78 @@ class _CategoryListState extends State<CategoryList> {
                   url:
                       'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
                 ),
-                SizedBox(
-                  height: 40,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    separatorBuilder: (context, index) =>
-                        Space.horizontal(10.w),
-                    itemBuilder: (context, index) => _CategoryTabItem(
-                      isActive: index == 0,
-                      label: 'Cat $index',
-                      onTap: () {},
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    // height: 500,
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 6,
+                      // number of items in the grid
+                      gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        // number of columns in the grid
+                        mainAxisSpacing: 10,
+                        // spacing between rows
+                        crossAxisSpacing: 10, // spacing between columns
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        // create a widget for each item in the grid
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.blue.withOpacity(0.05),
+                            border: Border.all(
+                              color: Colors.blue.withOpacity(0.05),
+                            ),
+                          ),
+                          child: svgIcon,
+                        );
+                      },
                     ),
                   ),
                 ),
-                SizedBox(
-                  child: Expanded(
-                    child: ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      separatorBuilder: (context, index) =>
-                          Space.vertical(10.h),
-                      itemBuilder: (context, index) => const _EazyMenTile(),
-                    ),
-                  ),
-                )
+                ListView.separated(
+                    shrinkWrap: true,
+                     physics: const NeverScrollableScrollPhysics(),
+                    itemCount:2,
+                    itemBuilder: (context, index) =>
+                        Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                    'ServiceNAme',
+                                style: Get.textTheme.titleLarge,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics:
+                                const NeverScrollableScrollPhysics(),
+                                itemCount: 3,
+                                itemBuilder: (context, _) {
+                                  return const EazymanServiceCard(
+                                    serviceProdName: "serviceProd",
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                    separatorBuilder:
+                        (BuildContext context, int index) =>
+                        Divider(
+                          color: Colors.grey.shade50,
+                          thickness: 5,
+                        )),
+
               ],
             ),
           ),
@@ -196,3 +254,7 @@ class _CategoryTabItem extends StatelessWidget {
     );
   }
 }
+
+
+
+

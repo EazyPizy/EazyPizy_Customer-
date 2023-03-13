@@ -45,7 +45,8 @@ dependencies:
   order_tracker: ^0.0.2
   google_fonts: ^4.0.3
   shimmer: ^2.0.0
-
+  flutter_svg: ^2.0.3
+  pinput: ^2.2.31
   cached_network_image: ^3.2.3
   flutter_adaptive_scaffold: ^0.1.0
 
@@ -81,6 +82,8 @@ flutter:
     - assets/EazymenLogo.png
     - assets/five.jpg
     - assets/cleaningServices.jpg
+    - assets/svg_Icons/Fridge.svg
+    - assets/svg_Icons/Fridge-optimized.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

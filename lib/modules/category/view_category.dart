@@ -1,4 +1,5 @@
-import 'package:eazymen_customer/modules/category/components/_EazymanGridTile.dart';
+import 'package:eazymen_customer/modules/category/components/Store_Shortcut.dart';
+import 'package:eazymen_customer/modules/category/components/SubCatGridTile.dart';
 import 'package:eazymen_customer/modules/category/components/popular_categories.dart';
 import 'package:eazymen_customer/modules/home/components/banner.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
@@ -18,155 +19,144 @@ class CategoryView extends StatefulWidget {
 
 double top = 0;
 
-class _CategoryViewState extends State<CategoryView> {
+class _CategoryViewState extends State<CategoryView> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: EazyColors.dummy,
-      body: CustomScrollView(
-
-        slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            //  title: Text('EazyPizy Store', style: Get.textTheme.titleMedium),
-            elevation: 0.5,
-            pinned: true,
-            backgroundColor: EazyColors.white,
-            expandedHeight: 320,
-            flexibleSpace: LayoutBuilder(
-              builder: (ctx, cons) {
-                top = cons.biggest.height;
-                return FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 100),
-                    opacity: top <= 130 ? 1.0 : 0.0,
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 12,
+    return  Scaffold(
+            body: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  pinned: true,
+                  surfaceTintColor: EazyColors.white,
+                  expandedHeight: 320,
+                  flexibleSpace: LayoutBuilder(
+                    builder: (ctx, cons) {
+                      top = cons.biggest.height;
+                      return FlexibleSpaceBar(
+                        centerTitle: true,
+                        title: AnimatedOpacity(
+                          duration: const Duration(milliseconds: 100),
+                          opacity: top <= 130 ? 1.0 : 0.0,
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                'Home Servicesss',
+                                style: Get.textTheme.headlineMedium,
+                              )
+                            ],
+                          ),
                         ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Text(
-                          'Home Servicesss',
-                          style: Get.textTheme.headlineMedium,
-                        )
-                      ],
-                    ),
-                  ),
-                  background: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const EazyNetworkImage(
-                        url:
-                            'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Text(
-                          'Find the Best',
-                          style: Get.textTheme.headlineLarge!
-                              .copyWith(color: EazyColors.black),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 8,
-                          left: 8,
-                          right: 8,
-                        ),
-                        child: Row(
+                        background: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'EazyMen',
-                              style: Get.textTheme.headlineLarge!
-                                  .copyWith(color: EazyColors.amber),
+                            Space.vertical(20.h),
+
+                            const EazyNetworkImage(
+                              url:
+                                  'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
                             ),
-                            Text(
-                              'Near you',
-                              style: Get.textTheme.headlineLarge!
-                                  .copyWith(color: EazyColors.black),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                'Find the Best',
+                                style: Get.textTheme.headlineLarge!
+                                    .copyWith(color: EazyColors.black),
+                              ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8,
+                                left: 8,
+                                right: 8,
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'EazyMen',
+                                    style: Get.textTheme.headlineLarge!
+                                        .copyWith(color: EazyColors.dummy),
+                                  ),
+                                  Text(
+                                    'Near you',
+                                    style: Get.textTheme.headlineLarge!
+                                        .copyWith(color: EazyColors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // Stack(children: [
+                            //   Image.network(
+                            //     'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
+                            //     fit: BoxFit.cover,
+                            //   ),
+                            //   Align(
+                            //     alignment: Alignment.bottomCenter,
+                            //     child: Column(
+                            //         crossAxisAlignment: CrossAxisAlignment.start,
+                            //         children: [
+                            //           // SizedBox(
+                            //           //   height: 50,
+                            //           // ),
+                            //            Text(
+                            //             'Find the Best',
+                            //             style: Get.textTheme.headlineLarge!
+                            //                 .copyWith(color: EazyColors.black),
+                            //           ),
+                            //           Row(
+                            //             children: [
+                            //               Text(
+                            //                 'EazyMen ',
+                            //                 style: Get.textTheme.headlineLarge!
+                            //                     .copyWith(color: EazyColors.amber),
+                            //               ),
+                            //               Text(
+                            //                 'Near you',
+                            //                 style: Get.textTheme.headlineLarge!
+                            //                     .copyWith(color: EazyColors.black),
+                            //               ),
+                            //             ],
+                            //           ),
+                            //         ]),
+                            //   )
+                            // ]),
                           ],
                         ),
-                      ),
-
-                      // Stack(children: [
-                      //   Image.network(
-                      //     'https://firebasestorage.googleapis.com/v0/b/authprovider-e4b69.appspot.com/o/cleaningServices.jpg?alt=media&token=f3d12f29-5442-4de0-93dc-f3dc8bc51357',
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      //   Align(
-                      //     alignment: Alignment.bottomCenter,
-                      //     child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           // SizedBox(
-                      //           //   height: 50,
-                      //           // ),
-                      //            Text(
-                      //             'Find the Best',
-                      //             style: Get.textTheme.headlineLarge!
-                      //                 .copyWith(color: EazyColors.black),
-                      //           ),
-                      //           Row(
-                      //             children: [
-                      //               Text(
-                      //                 'EazyMen ',
-                      //                 style: Get.textTheme.headlineLarge!
-                      //                     .copyWith(color: EazyColors.amber),
-                      //               ),
-                      //               Text(
-                      //                 'Near you',
-                      //                 style: Get.textTheme.headlineLarge!
-                      //                     .copyWith(color: EazyColors.black),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //         ]),
-                      //   )
-                      // ]),
-                    ],
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Space.vertical(12.h),
-                const PopularCategories(),
-                Space.vertical(12.h),
-                const HomeBanner(),
-                Space.vertical(12.h),
-                const Divider(
-                  thickness: 15,
-                  color: EazyColors.lightBlack,
                 ),
-                Space.vertical(12.h),
-                const TopRatedSection(),
-                Space.vertical(12.h),
-                SizedBox(
-                  height: 500.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
-                    itemBuilder: (context, index) => const EazyMenGridTile(),
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      Space.vertical(12.h),
+                      const PopularCategories(),
+                      Space.vertical(12.h),
+                       const HomeBanner(
+                        autoPlay: true,
+                        width: double.infinity,
+                      ),
+                      Space.vertical(12.h),
+                      Space.vertical(12.h),
+                      const SubCatGridTile(),
+                      Space.vertical(12.h),
+                       StoreShortcut()
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        }
   }
-}
+
 
 class TopRatedSection extends StatelessWidget {
   const TopRatedSection({super.key});

@@ -1,3 +1,4 @@
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,14 +18,12 @@ class CustomerReviewTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
+      padding: const EdgeInsets.all(8),
+      child: EasyContainer(
         height: 120,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
-        ),
+        showBorder: true,
+        borderColor: EazyColors.borderColors,
+        
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Row(

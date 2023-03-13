@@ -1,6 +1,7 @@
 import 'package:eazymen_customer/core/pages.dart';
 import 'package:eazymen_customer/core/services/category_services.dart';
 import 'package:eazymen_customer/modules/navigation/view_navigation.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ import 'package:get/get.dart';
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.white,
-      statusBarColor: Colors.white, // navigation bar color
+      systemNavigationBarColor: EazyColors.white,
+      statusBarColor: EazyColors.white, // navigation bar color
       // status bar color
     ),
   );

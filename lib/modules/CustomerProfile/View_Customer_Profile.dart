@@ -23,17 +23,16 @@ class CustomerProfile extends StatelessWidget {
     IconData? _selectedIcon;
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.5,
         title: Text(
           'Profile',
           style: Get.textTheme.headlineMedium,
         ),
-        backgroundColor: EazyColors.appBarBG,
       ),
-      backgroundColor: EazyColors.background,
+     // backgroundColor: EazyColors.background,
       body: Column(
         children: [
           EasyContainer(
+
             color: Colors.blue,
             padding: 20,
             borderRadius: 10,

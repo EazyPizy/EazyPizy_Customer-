@@ -4,16 +4,14 @@ import 'package:eazymen_customer/modules/EazymanProfile/components/Easyman_Servi
 import 'package:eazymen_customer/modules/EazymanProfile/components/EazyMan_Info_Card.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/components/ViewCart_Bottom_Navigation.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/ctrl_profile.dart';
+import 'package:eazymen_customer/modules/home/components/simmerLoader.dart';
 import 'package:eazymen_customer/modules/home/models/model_home.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
-import 'package:eazymen_customer/widgets/eazy_networkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../home/components/simmerLoader.dart';
 
 class EazymanProfile extends StatelessWidget {
   const EazymanProfile({super.key, required this.eazyMen});
@@ -39,14 +37,13 @@ class EazymanProfile extends StatelessWidget {
                     elevation: 0.5,
 
                     backgroundColor: Colors.white,
-                    automaticallyImplyLeading: true,
                     pinned: true,
                     // title: Text("Plumber",
                     // style: TextStyle(
                     //   color: Colors.black
                     // ),
                     // ),
-                    expandedHeight: 210,
+                    expandedHeight: 210.h,
                     flexibleSpace: LayoutBuilder(
                       builder: (ctx, cons) {
                         top = cons.biggest.height;
@@ -114,10 +111,9 @@ class EazymanProfile extends StatelessWidget {
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 10,
-                            itemBuilder: (context, i) =>
-                                CustomerReviewTile(
-                                  index: i,
-                                ),
+                            itemBuilder: (context, i) => CustomerReviewTile(
+                              index: i,
+                            ),
                           ),
                         )
                       ],
@@ -132,11 +128,10 @@ class EazymanProfile extends StatelessWidget {
                         indicatorColor: EazyColors.dummy,
                         tabs: controller.userCategories
                             .map(
-                              (e) =>
-                              Tab(
+                              (e) => Tab(
                                 text: e.serviceName,
                               ),
-                        )
+                            )
                             .toList(),
                       ),
                     ),
@@ -144,31 +139,27 @@ class EazymanProfile extends StatelessWidget {
                 ];
               },
               body: controller.loading
-                  ? const Center(
-                  child: ShimmerLoader()
-              )
+                  ? const Center(child: ShimmerLoader())
                   : TabBarView(
-                // controller: controller.tabController,
-                children: controller.userCategories
-                    .map(
-                      (e) =>
-                      ListView.separated(
-                          shrinkWrap: true,
-                          // physics: const NeverScrollableScrollPhysics(),
-                          itemCount:
-                          controller.userSubServiceCategories.length,
-                          itemBuilder: (context, index) =>
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                      // controller: controller.tabController,
+                      children: controller.userCategories
+                          .map(
+                            (e) => ListView.separated(
+                              shrinkWrap: true,
+                              // physics: const NeverScrollableScrollPhysics(),
+                              itemCount:
+                                  controller.userSubServiceCategories.length,
+                              itemBuilder: (context, index) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 8, right: 8),
+                                    padding: const EdgeInsets.only(
+                                      left: 8,
+                                      right: 8,
+                                    ),
                                     child: Text(
-                                      controller
-                                          .userSubServiceCategories[
-                                      index]
-                                          .subServiceName ??
+                                      controller.userSubServiceCategories[index]
+                                              .subServiceName ??
                                           '',
                                       style: Get.textTheme.titleLarge,
                                     ),
@@ -178,39 +169,49 @@ class EazymanProfile extends StatelessWidget {
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       physics:
-                                      const NeverScrollableScrollPhysics(),
+                                          const NeverScrollableScrollPhysics(),
                                       itemCount: controller
                                           .getSubServiceProduct(
-                                        controller
-                                            .userSubServiceCategories[
-                                        index],
-                                      )
+                                            controller.userSubServiceCategories[
+                                                index],
+                                          )
                                           .length,
                                       itemBuilder: (context, _) {
-                                        return EazymanServiceCard(
-                                          serviceProdName: controller
-                                              .getSubServiceProduct(
-                                            controller
-                                                .userSubServiceCategories[
-                                            index],
-                                          )[_]
-                                              .serviceProductName ??
-                                              '',
+                                        return InkWell(
+                                          onTap: () {
+                                            controller.addToCart(
+                                              controller.getSubServiceProduct(
+                                                controller
+                                                        .userSubServiceCategories[
+                                                    index],
+                                              )[_],
+                                            );
+                                          },
+                                          child: EazymanServiceCard(
+                                            serviceProdName: controller
+                                                    .getSubServiceProduct(
+                                                      controller
+                                                              .userSubServiceCategories[
+                                                          index],
+                                                    )[_]
+                                                    .serviceProductName ??
+                                                '',
+                                          ),
                                         );
                                       },
                                     ),
                                   ),
                                 ],
                               ),
-                          separatorBuilder:
-                              (BuildContext context, int index) =>
-                              Divider(
+                              separatorBuilder:
+                                  (BuildContext context, int index) => Divider(
                                 color: Colors.grey.shade50,
                                 thickness: 5,
-                              )),
-                )
-                    .toList(),
-              ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
             ),
           );
         },
@@ -234,9 +235,11 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(BuildContext context,
-      double shrinkOffset,
-      bool overlapsContent,) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return ColoredBox(
       color: Colors.white,
       child: _tabBar,
@@ -315,11 +318,10 @@ Future viewAllReviews() {
                       unratedColor: Colors.amber.withAlpha(50),
                       itemSize: 15,
                       itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-                      itemBuilder: (context, _) =>
-                          Icon(
-                            selectedIcon ?? Icons.star,
-                            color: Colors.green,
-                          ),
+                      itemBuilder: (context, _) => Icon(
+                        selectedIcon ?? Icons.star,
+                        color: Colors.green,
+                      ),
                       onRatingUpdate: (rating) {
                         // setState(() {
                         //   _rating = rating;

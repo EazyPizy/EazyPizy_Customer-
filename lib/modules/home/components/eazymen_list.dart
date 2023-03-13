@@ -68,7 +68,7 @@ import 'package:get/get.dart';
 // }
 
 class EazyMenTile extends StatelessWidget {
-  const EazyMenTile(this.eazyMan);
+  const EazyMenTile(this.eazyMan, {super.key});
 
   final EazyMenModel eazyMan;
 
@@ -76,124 +76,124 @@ class EazyMenTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        EasyContainer(
-          elevation: 0.5,
-          height: 120,
-          // width: double.infinity,
-
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  EazymanProfile(eazyMen: eazyMan,)),
-            );
-          },
-          // customPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          //  borderRadius: 16.r,
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Colors.blueAccent.withOpacity(0.50),
-                    ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8),
+          child: EasyContainer(
+            elevation: 0.5,
+            height: 120,
+            width: double.infinity,
+            color: EazyColors.white,
+            //splashColor: EazyColors.white,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EazymanProfile(
+                          eazyMen: eazyMan,
+                        ),),
+              );
+            },
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: EasyContainer(
+                    showBorder: true,
+                    borderColor: EazyColors.borderColors,
+                    height: 90,
+                    width: 75,
+                    child: Image.network(
+                        'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
                   ),
-                  height: 90,
-                  width: 75,
-                  child: Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/eazyman-2e7a7.appspot.com/o/User_images%2FEazyMan.png?alt=media&token=a376abde-5072-4d49-b25d-a7b059f4fb29'),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12, left: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      eazyMan.personalDetail?.firstName??'',
-                      style: Get.textTheme.titleLarge,
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            'AC Technician ',
-                            style: Get.textTheme.titleSmall,
-                            softWrap: true,
-                            overflow: TextOverflow.fade,
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        eazyMan.personalDetail?.firstName ?? '',
+                        style: Get.textTheme.titleLarge,
+                        softWrap: true,
+                        overflow: TextOverflow.fade,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Text(
+                              'AC Technician ',
+                              style: Get.textTheme.titleSmall,
+                              softWrap: true,
+                              overflow: TextOverflow.fade,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            'Electrician',
-                            style: Get.textTheme.titleSmall,
-                            softWrap: true,
-                            overflow: TextOverflow.fade,
+                          const SizedBox(
+                            width: 8,
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                size: 20,
-                                Icons.star,
-                                color: Colors.blueAccent,
-                              ),
-                              Text(
-                                '4.5',
-                                style: Get.textTheme.titleMedium,
-                                softWrap: true,
-                                overflow: TextOverflow.fade,
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Text(
+                              'Electrician',
+                              style: Get.textTheme.titleSmall,
+                              softWrap: true,
+                              overflow: TextOverflow.fade,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                size: 20,
-                                Icons.credit_card,
-                                color: Colors.blueAccent,
-                              ),
-                              Text(
-                                '350 Jobs ',
-                                style: Get.textTheme.titleMedium,
-                                softWrap: true,
-                                overflow: TextOverflow.fade,
-                              ),
-                            ],
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  size: 20,
+                                  Icons.star,
+                                  color: Colors.blueAccent,
+                                ),
+                                Text(
+                                  '4.5',
+                                  style: Get.textTheme.titleMedium,
+                                  softWrap: true,
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  size: 20,
+                                  Icons.credit_card,
+                                  color: Colors.blueAccent,
+                                ),
+                                Text(
+                                  '350 Jobs ',
+                                  style: Get.textTheme.titleMedium,
+                                  softWrap: true,
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         Align(
@@ -212,5 +212,4 @@ class EazyMenTile extends StatelessWidget {
       ],
     );
   }
-
 }

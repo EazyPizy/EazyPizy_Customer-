@@ -7,15 +7,19 @@ import '../../../theme/eazy_spaces.dart';
 import 'CarouselImage.dart';
 
 class HomeBanner extends StatelessWidget {
-  const HomeBanner({
-    super.key,
-  });
+  const HomeBanner({super.key, required this.autoPlay, required this.width});
+
+  final bool autoPlay;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
         height: 150,
         width: double.infinity,
-        child:  Carousel());
+        child: Carousel(
+          width: width,
+          autoplay: autoPlay,
+        ));
   }
 }

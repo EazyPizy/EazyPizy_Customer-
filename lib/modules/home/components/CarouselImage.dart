@@ -2,7 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class Carousel extends StatefulWidget {
-  const Carousel({super.key});
+  const Carousel({super.key, required this.autoplay,required this.width});
+
+  final bool autoplay;
+  final double width;
 
   @override
   _CarouselState createState() => _CarouselState();
@@ -26,13 +29,15 @@ class _CarouselState extends State<Carousel> {
           child: Image.network(
             url,
             fit: BoxFit.fill,
-            //width: double.infinity,
+            width: widget.width,
           ),
         );
       }).toList(),
       options: CarouselOptions(
-        autoPlay: false,
+        autoPlay: widget.autoplay,
         aspectRatio: 2,
+        viewportFraction: 0.9,
+          enlargeCenterPage: true
       ),
     );
   }

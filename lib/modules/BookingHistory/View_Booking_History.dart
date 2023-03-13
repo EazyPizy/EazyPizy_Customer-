@@ -20,9 +20,6 @@ class _BookingHistoryState extends State<BookingHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        elevation: 0.5,
-        backgroundColor: EazyColors.appBarBG,
         title: Text(
           'Manage Orders',
           style: Get.textTheme.titleMedium,

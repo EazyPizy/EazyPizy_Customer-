@@ -17,6 +17,7 @@ class VisitingCard extends StatelessWidget {
       child: EasyContainer(
         padding: 8,
         color: EazyColors.white,
+        showBorder: false,
         elevation: 0.5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,

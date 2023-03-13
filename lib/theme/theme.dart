@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData theme = ThemeData(
   useMaterial3: true,
-  primaryColor: EazyColors.primary,
+  scaffoldBackgroundColor: EazyColors.background,
+  // primaryColor: EazyColors.primary,
   appBarTheme: const AppBarTheme(
     elevation: 0.5,
     backgroundColor: EazyColors.appBarBG,

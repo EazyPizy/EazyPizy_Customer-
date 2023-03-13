@@ -1,4 +1,5 @@
 import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
+import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -20,7 +21,7 @@ class ViewCartBottomNavigation extends StatelessWidget {
         ? DecoratedBox(
             decoration: const BoxDecoration(
 
-              color: Colors.white60,
+              color: EazyColors.white,
             ),
             child: Padding(
               padding: const EdgeInsets.all(8),
@@ -29,7 +30,7 @@ class ViewCartBottomNavigation extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 150,
-                    height: 80,
+                    height: 50,
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: Column(

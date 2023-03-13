@@ -16,7 +16,7 @@ class BookingHistoryDetails extends StatefulWidget {
 }
 
 List<TextDto> orderList = [
-  TextDto("Your order has been placed", "Fri, 25th Mar '22 - 10:47pm"),
+  TextDto('Your order has been placed', "Fri, 25th Mar '22 - 10:47pm"),
   TextDto("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
   TextDto("Your item has been picked up by courier partner.",
       "Tue, 29th Mar '22 - 5:00pm"),
@@ -40,8 +40,6 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: EazyColors.appBarBG,
-          elevation: 0.5,
           title: Text('Booking ID', style: Get.textTheme.titleMedium)),
       body: SingleChildScrollView(
         padding: Space.scaffoldPadding,
@@ -50,19 +48,19 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
-                  Text('Order #01'),
+                  const Text('Order #01'),
                   const Spacer(),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.circle,
                         color: Colors.red,
                         size: 10,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text('Cancelled', style: Get.textTheme.titleMedium),
@@ -176,7 +174,7 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
                   'assets/five.jpg',
                 ),
               ),
-              tileColor: EazyColors.primary,
+              tileColor: EazyColors.white,
               minLeadingWidth: 8,
               minVerticalPadding: 15,
               title: Text(
@@ -190,7 +188,7 @@ class _BookingHistoryDetailsState extends State<BookingHistoryDetails> {
               trailing: TextButton(onPressed: () {}, child: const Text('2')),
             ),
             ListTile(
-              tileColor: EazyColors.primary,
+              tileColor: EazyColors.white,
               minLeadingWidth: 8,
               minVerticalPadding: 15,
               leading: EasyContainer(

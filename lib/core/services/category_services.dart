@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eazymen_customer/core/logger.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/model_subService_product.dart';
@@ -15,9 +17,13 @@ class CategoryService extends GetxService {
   late final List<SubServiceProductModel> _subServiceProducts;
 
   Future<CategoryService> init() async {
-    await loadMainServiceCategories();
-    await loadSubServiceCategories();
-    await loadSubServiceProducts();
+    await Future.wait([
+      loadMainServiceCategories(),
+      loadSubServiceCategories(),
+      loadSubServiceProducts(),
+    ]).onError(
+      (error, stackTrace) => Future.value([]),
+    );
     return this;
   }
 

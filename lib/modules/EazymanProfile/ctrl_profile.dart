@@ -1,4 +1,5 @@
 import 'package:eazymen_customer/core/logger.dart';
+import 'package:eazymen_customer/core/services/cart_service.dart';
 import 'package:eazymen_customer/core/services/category_services.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/model_subService_product.dart';
 import 'package:eazymen_customer/modules/home/ctrl_home.dart';
@@ -96,6 +97,10 @@ class ProfileController extends GetxController {
       );
     }
     update();
+  }
+
+  void addToCart(SubServiceProductModel product) {
+    CartService.instance.addToCart(eazyMen: eazyMen, product: product);
   }
 
   @override

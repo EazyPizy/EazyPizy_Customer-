@@ -7,6 +7,8 @@ import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/easy_container.dart';
+
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
 
@@ -33,8 +35,10 @@ class _NavigationViewState extends State<NavigationView> {
         return true;
       },
       child: Scaffold(
+        backgroundColor: EazyColors.appBarBG,
         body: _pages[_selectedPageIndex],
         bottomNavigationBar: CustomBottomNavigationBar(
+
           iconList: const [
             Icons.home,
             Icons.category_rounded,

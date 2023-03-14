@@ -1,20 +1,16 @@
-import 'package:eazymen_customer/modules/Cart/Components/selectedEazyman.dart';
-import 'package:eazymen_customer/modules/EazyPizy_Store/components/Product_Card2.dart';
+import 'package:eazymen_customer/core/services/cart_service.dart';
+import 'package:eazymen_customer/modules/Apply_Coupans/ApplyCoupons.dart';
+import 'package:eazymen_customer/modules/Cart/Components/PaymentSummary.dart';
+import 'package:eazymen_customer/modules/Cart/Components/service_In_Cart.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/components/ViewCart_Bottom_Navigation.dart';
+import 'package:eazymen_customer/modules/SignUp_SignIn/ctrl_authentication.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/theme/eazy_spaces.dart';
 import 'package:eazymen_customer/widgets/easy_container.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../AnimatedContainer.dart';
-import '../Apply_Coupans/ApplyCoupons.dart';
-import '../Booking_Schedule/View_SelectService_Slot.dart';
-import 'Components/PaymentSummary.dart';
-import 'Components/service_In_Cart.dart';
 
 class ViewCart extends StatelessWidget {
   const ViewCart({super.key});
@@ -24,15 +20,16 @@ class ViewCart extends StatelessWidget {
     final cartItem = <String>['new'];
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Cart',
-            style: Get.textTheme.headlineMedium,
-          ),
-          actions: const [],
+      appBar: AppBar(
+        title: Text(
+          'Cart',
+          style: Get.textTheme.headlineMedium,
         ),
-        body: cartItem.isNotEmpty
-            ? Stack(children: [
+        actions: const [],
+      ),
+      body: cartItem.isNotEmpty
+          ? Stack(
+              children: [
                 SingleChildScrollView(
                   padding: Space.scaffoldPadding,
                   child: Column(
@@ -80,41 +77,44 @@ class ViewCart extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-              ])
-            : Container(),
-        bottomNavigationBar: ViewCartBottomNavigation(
-          buttonWidget: customButtons(context),
-        ));
+              ],
+            )
+          : Container(),
+      bottomNavigationBar: ViewCartBottomNavigation(
+        buttonWidget: customButtons(context),
+      ),
+    );
   }
 }
 
 Widget customButtons(BuildContext context) {
   return Expanded(
-      child: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            _addDeliveryAddress(context);
-          },
-          child: Text('Add Address', style: Get.textTheme.labelSmall),
-        ),
-        IconButton(
-          onPressed: () {
-            enterMobileNumber(context);
-          },
-          icon: const Icon(Icons.chevron_right),
-        )
-      ],
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              _addDeliveryAddress(context);
+            },
+            child: Text('Add Address', style: Get.textTheme.labelSmall),
+          ),
+          IconButton(
+            onPressed: () {
+              // enterMobileNumber(context);
+              CartService.instance.checkout();
+            },
+            icon: const Icon(Icons.chevron_right),
+          )
+        ],
+      ),
     ),
-  ));
+  );
 }
 
 Widget yourSavings() {
   return EasyContainer(
-    elevation: 0,
     color: Colors.green,
     height: 50,
     child: Text('You are saving 50Rs', style: Get.textTheme.labelSmall),
@@ -128,18 +128,20 @@ Widget _applyCoupon() {
     child: ListTile(
       tileColor: EazyColors.white,
       onTap: () {
-        Get.to(ApplyCoupons());
+        Get.to(const ApplyCoupons());
       },
       title: Text('Apply Coupon', style: Get.textTheme.labelSmall),
-      subtitle: Text('Avail Offer and Discount on your Order',
-          style: Get.textTheme.labelSmall),
+      subtitle: Text(
+        'Avail Offer and Discount on your Order',
+        style: Get.textTheme.labelSmall,
+      ),
       trailing: const Icon(Icons.navigate_next_outlined),
     ),
   );
 }
 
 Future<void> _addDeliveryAddress(BuildContext context) {
-  TextEditingController houseNumberController = TextEditingController();
+  final houseNumberController = TextEditingController();
   return Get.bottomSheet(
     EasyContainer(
       borderRadius: 10,
@@ -171,28 +173,31 @@ Future<void> _addDeliveryAddress(BuildContext context) {
             ),
           ),
           TextButton(
-              onPressed: () {},
-              child: Text('Save Address', style: Get.textTheme.labelSmall)),
+            onPressed: () {},
+            child: Text('Save Address', style: Get.textTheme.labelSmall),
+          ),
         ],
       ),
     ),
   );
 }
 
-Future<void> enterMobileNumber(BuildContext context) {
+Future<void> enterMobileNumber() {
+  final controller = Get.put(AuthenticationController());
   return Get.bottomSheet(
     EasyContainer(
       borderRadius: 10,
-      height: MediaQuery.of(context).size.height - 0.1,
+      height: Get.size.height - 0.1,
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           const SizedBox(height: 100),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8),
             child: TextField(
-              decoration: InputDecoration(
+              controller: controller.mobileNumberController,
+              decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.greenAccent, width: 0.5),
                 ),
@@ -205,21 +210,21 @@ Future<void> enterMobileNumber(BuildContext context) {
             ),
           ),
           ElevatedButton(
-              onPressed: () {
-                enterOTP(context);
-              },
-              child: Text('Send OTP', style: Get.textTheme.labelSmall))
+            onPressed: controller.sendOtp,
+            child: Text('Send OTP', style: Get.textTheme.labelSmall),
+          )
         ],
       ),
     ),
   );
 }
 
-Future<void> enterOTP(BuildContext context) {
+Future<void> enterOTP() {
+  final controller = Get.find<AuthenticationController>();
   return Get.bottomSheet(
     EasyContainer(
       borderRadius: 10,
-      height: MediaQuery.of(context).size.height - 0.1,
+      height: Get.size.height - 0.1,
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -229,15 +234,20 @@ Future<void> enterOTP(BuildContext context) {
             // defaultPinTheme: defaultPinTheme,
             // focusedPinTheme: focusedPinTheme,
             // submittedPinTheme: submittedPinTheme,
+            controller: controller.otpController,
+            length: 6,
             validator: (s) {
-              return s == '2222' ? null : 'Pin is incorrect';
+              if ((s?.length ?? 0) < 6) {
+                return 'Enter complete digits';
+              }
+              return null;
             },
-            showCursor: true,
-            onCompleted: (pin) => print(pin),
+            onCompleted: print,
           ),
           ElevatedButton(
-              onPressed: () {},
-              child: Text('Verify OTP', style: Get.textTheme.labelSmall))
+            onPressed: controller.verifyOtp,
+            child: Text('Verify OTP', style: Get.textTheme.labelSmall),
+          )
         ],
       ),
     ),
@@ -245,7 +255,7 @@ Future<void> enterOTP(BuildContext context) {
 }
 
 Widget? buildPinPut() {
-  return Pinput(
-    onCompleted: (pin) => print(pin),
+  return const Pinput(
+    onCompleted: print,
   );
 }

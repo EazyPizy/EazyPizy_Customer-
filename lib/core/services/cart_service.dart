@@ -1,5 +1,7 @@
 import 'package:eazymen_customer/core/logger.dart';
-import 'package:eazymen_customer/core/services/user_service.dart';
+import 'package:eazymen_customer/core/routes.dart';
+import 'package:eazymen_customer/core/services/customer_service.dart';
+import 'package:eazymen_customer/modules/Cart/View_Cart.dart';
 import 'package:eazymen_customer/modules/EazymanProfile/model_subService_product.dart';
 import 'package:eazymen_customer/modules/home/models/model_home.dart';
 import 'package:get/get.dart';
@@ -47,10 +49,13 @@ class CartService extends GetxService {
   }
 
   void checkout() {
-    if (UserService.instance.isLoggedIn) {
+    if (CustomerService.instance.isLoggedIn) {
       // ! : to checkout
+      Get.toNamed(Routes.checkout);
     } else {
       // ! : Login sheet
+      _log.v('No customer found');
+      enterMobileNumber();
     }
   }
 

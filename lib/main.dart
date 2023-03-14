@@ -1,6 +1,7 @@
 import 'package:eazymen_customer/core/pages.dart';
 import 'package:eazymen_customer/core/services/cart_service.dart';
 import 'package:eazymen_customer/core/services/category_services.dart';
+import 'package:eazymen_customer/core/services/customer_service.dart';
 import 'package:eazymen_customer/modules/navigation/view_navigation.dart';
 import 'package:eazymen_customer/theme/app_colors.dart';
 import 'package:eazymen_customer/theme/theme.dart';
@@ -20,8 +21,12 @@ void main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await Get.putAsync(() => CategoryService().init());
+  await Future.wait([
+    Get.putAsync(() => CategoryService().init()),
+    Get.putAsync(() => CustomerService().init()),
+  ]);
   Get.put(CartService());
+
   runApp(const MyApp());
 }
 

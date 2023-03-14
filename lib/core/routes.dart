@@ -1,3 +1,5 @@
 abstract class Routes {
-  static const HOME = '/home';
+  static const home = '/home';
+  static const updateProfile = '/update-profile';
+  static const checkout = '/checkout';
 }
